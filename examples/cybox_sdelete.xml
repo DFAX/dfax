@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cybox:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cybox="http://cybox.mitre.org/cybox-2"
+  xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+  xmlns:ProductObj="http://cybox.mitre.org/objects#ProductObject-2" xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+  xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2" xmlns:example="http://example.com/" cybox_major_version="2"
+  cybox_minor_version="1" cybox_update_version="0">
+  <cybox:Observable id="example:Observable-1">
+    <cybox:Description>SecureDelete program from Microsoft's SysInternals suite.</cybox:Description>
+    <cybox:Object id="example:Product-1">
+      <cybox:Properties xsi:type="ProductObj:ProductObjectType">
+        <ProductObj:Product>Secure Delete</ProductObj:Product>
+        <ProductObj:Version>1.61</ProductObj:Version>
+      </cybox:Properties>
+      <cybox:Related_Objects>
+        <cybox:Related_Object idref="example:File-2">
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+        </cybox:Related_Object>
+        <cybox:Related_Object idref="example:RegistryKey-3">
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+        </cybox:Related_Object>
+      </cybox:Related_Objects>
+    </cybox:Object>
+  </cybox:Observable>
+  <cybox:Observable id="example:Observable-2">
+    <cybox:Description>The actual executable file corresponding tot he SDelete tool.</cybox:Description>
+    <cybox:Object id="example:File-2">
+      <cybox:Properties xsi:type="FileObj:FileObjectType">
+        <FileObj:File_Name>sdelete.exe</FileObj:File_Name>
+        <FileObj:Hashes>
+          <cyboxCommon:Hash>
+            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+            <cyboxCommon:Simple_Hash_Value>E189B5CE11618BB7880E9B09D53A588F</cyboxCommon:Simple_Hash_Value>
+          </cyboxCommon:Hash>
+          <cyboxCommon:Hash>
+            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+            <cyboxCommon:Simple_Hash_Value>97D27E1225B472A63C88AC9CFB813019B72598B9DD2D70FE93F324F7D034FB95</cyboxCommon:Simple_Hash_Value>
+          </cyboxCommon:Hash>
+        </FileObj:Hashes>
+        <FileObj:Created_Time>2013-01-09T14:25:04-0800</FileObj:Created_Time>
+      </cybox:Properties>
+    </cybox:Object>
+  </cybox:Observable>
+  <cybox:Observable id="example:Observable-3">
+    <cybox:Description>A registry key indicating the SDelete tool has been launched, and had its EULA accepted.</cybox:Description>
+    <cybox:Object id="example:RegistryKey-3">
+      <cybox:Properties xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+        <WinRegistryKeyObj:Key>Software\Sysinternal\SDelete</WinRegistryKeyObj:Key>
+        <WinRegistryKeyObj:Hive>HKCU</WinRegistryKeyObj:Hive>
+        <WinRegistryKeyObj:Values>
+          <WinRegistryKeyObj:Value>
+            <WinRegistryKeyObj:Name>EulaAccepted</WinRegistryKeyObj:Name>
+            <WinRegistryKeyObj:Data>1</WinRegistryKeyObj:Data>
+          </WinRegistryKeyObj:Value>
+        </WinRegistryKeyObj:Values>
+      </cybox:Properties>
+    </cybox:Object>
+  </cybox:Observable>
+  <cybox:Observable id="example:Observable-4">
+    <cybox:Description>A file that has been overwritten using the SDelete tool.</cybox:Description>
+    <cybox:Object id="example:File-4">
+      <cybox:Properties xsi:type="FileObj:FileObjectType">
+        <FileObj:File_Name condition="FitsPattern">Z+.Z+</FileObj:File_Name>
+        <FileObj:Modified_Time condition="GreaterThanOrEqual">2015-01-03T11:49:44-0800</FileObj:Modified_Time>
+      </cybox:Properties>
+      <cybox:Related_Objects>
+        <cybox:Related_Object idref="example:Product-1">
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created_By</cybox:Relationship>
+        </cybox:Related_Object>
+      </cybox:Related_Objects>
+    </cybox:Object>
+  </cybox:Observable>
+</cybox:Observables>
