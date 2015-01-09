@@ -1,0 +1,1308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 sp2 (http://www.altova.com) by Sean Barnum (MITRE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" targetNamespace="http://uco.mitre.org/common-1" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:import namespace="http://cybox.mitre.org/common-2" schemaLocation="cybox/cybox_common.xsd"/>
+	<xs:import namespace="http://cybox.mitre.org/cybox-2" schemaLocation="cybox/cybox_core.xsd"/>
+	<xs:import namespace="http://data-marking.mitre.org/Marking-1" schemaLocation="data_marking.xsd"/>
+	<xs:element name="UCO">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!---->
+	<xs:complexType name="IDableConstructType">
+		<xs:attribute name="id" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>Specifies a globally unique identifier for this construct. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="idref" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>Specifies a globally unique identifier of a construct specified elsewhere.</xs:documentation>
+				<xs:documentation>When idref is specified, the id attribute must not be specified, and any instance of this construct should not hold content.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="timestamp" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Specifies a timestamp for the definition of a specific version of a construct. When used in conjunction with the id, this field is specifying the definition time for the specific version of the construct. When used in conjunction with the idref, this field is specifying a reference to a specific version of a construct defined elsewhere. This field has no defined semantic meaning if used in the absence of either the id or idref fields.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="SourcedConstructType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDableConstructType">
+				<xs:sequence>
+					<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MarkedConstructType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDableConstructType">
+				<xs:sequence>
+					<xs:element name="Handling" type="marking:MarkingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the relevant handling guidance for this construct. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CoreConstructType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDableConstructType">
+				<xs:sequence>
+					<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0"/>
+					<xs:element name="Handling" type="marking:MarkingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the relevant handling guidance for this construct. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Title" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Title field provides a simple title for this construct.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The Description field provides a description of this construct.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IdentityConstructType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:CoreConstructType">
+				<xs:sequence>
+					<xs:element name="Identity" type="ucoCommon:IdentityType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="StructuredTextType">
+		<xs:annotation>
+			<xs:documentation>The StructuredTextType is a type representing a generalized structure for capturing structured or unstructured textual information such as descriptions of things.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="structuring_format" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Used to indicate a particular structuring format (e.g., HTML5) used within an instance of StructuredTextType. Note that if the markup tags used by this format would be interpreted as XML information (such as the bracket-based tags of HTML) the text area should be enclosed in a CDATA section to prevent the markup from interferring with XML validation of the STIX document. If this attribute is absent, the implication is that no markup is being used.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DateWithPrecisionType">
+		<xs:annotation>
+			<xs:documentation>This type is used as a replacement for the standard xs:date type but allows for the representation of the precision of the date. If the precision is given, consumers must ignore the portions of this field that is more precise than the given precision. Producers should zero-out (fill with zeros) digits in the date that are required by the xs:date datatype but are beyond the specified precision.</xs:documentation>
+			<xs:documentation>In order to avoid ambiguity, it is strongly suggested that all dates include a specification of the timezone if it is known.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:date">
+				<xs:attribute name="precision" type="ucoCommon:DatePrecisionEnum" default="day">
+					<xs:annotation>
+						<xs:documentation>The precision of the associated date. If omitted, the default is "day", meaning the full field value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DateTimeWithPrecisionType">
+		<xs:annotation>
+			<xs:documentation>This type is used as a replacement for the standard xs:dateTime type but allows for the representation of the precision of the dateTime.  If the precision is given, consumers must ignore the portions of this field that is more precise than the given precision. Producers should zero-out (fill with zeros) digits in the dateTime that are required by the xs:dateTime datatype but are beyond the specified precision.</xs:documentation>
+			<xs:documentation>In order to avoid ambiguity, it is strongly suggested that all dateTimes include a specification of the timezone if it is known.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:dateTime">
+				<xs:attribute name="precision" type="ucoCommon:DateTimePrecisionEnum" default="second">
+					<xs:annotation>
+						<xs:documentation>The precision of the associated dateTime. If omitted, the default is "second", meaning the full field value (including fractional seconds).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="DatePrecisionEnum">
+		<xs:annotation>
+			<xs:documentation>Possible values for representing date precision.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="year">
+				<xs:annotation>
+					<xs:documentation>Date is precise to the given year.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="month">
+				<xs:annotation>
+					<xs:documentation>Date is precise to the given month.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="day">
+				<xs:annotation>
+					<xs:documentation>Date is precise to the given day.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimePrecisionEnum">
+		<xs:annotation>
+			<xs:documentation>Possible values for representing time precision.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="hour">
+				<xs:annotation>
+					<xs:documentation>Time is precise to the given hour.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="minute">
+				<xs:annotation>
+					<xs:documentation>Time is precise to the given minute.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="second">
+				<xs:annotation>
+					<xs:documentation>Time is precise to the given second (including fractional seconds).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DateTimePrecisionEnum">
+		<xs:annotation>
+			<xs:documentation>Possible values for representing time precision.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="ucoCommon:DatePrecisionEnum ucoCommon:TimePrecisionEnum"/>
+	</xs:simpleType>
+	<xs:complexType name="TimeType">
+		<xs:annotation>
+			<xs:documentation>The TimeType specifies various time properties for this construct.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Start_Time" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Start_Time field is optional and describes the starting time for this construct. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="End_Time" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The End_Time field is optional and describes the ending time for this construct. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Produced_Time" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Produced_Time field is optional and describes the time that this construct was produced. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Received_Time" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Received_Time field is optional and describes the time that this construct was received. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContributingSourcesType">
+		<xs:sequence>
+			<xs:element name="Source" type="ucoCommon:InformationSourceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Source field contains information describing the identity, resources and timing of involvement for a single contributing Source.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type extension mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_identity.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_identity/1.1.1/ciq_identity.xsd.</xs:documentation>
+					<xs:documentation>Those who wish to express a simple name may also do so by not specifying an xsi:type and using the Name field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReferencesType">
+		<xs:sequence>
+			<xs:element name="Reference" type="xs:anyURI" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Reference field is optional and enables specification of a reference to an information source material.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="InformationSourceType">
+		<xs:annotation>
+			<xs:documentation>The InformationSourceType details the source of a given data entry.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Description field provides a description of this information source.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identity" type="ucoCommon:IdentityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Identity field is optional and specifies the identity of the information source.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type extension mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_identity.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_identity/1.1.1/ciq_identity.xsd.</xs:documentation>
+					<xs:documentation>Those who wish to express a simple name may also do so by not specifying an xsi:type and using the Name field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Role" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Role field is optional and enables characterization of the sourcing Role played by this Information Source.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contributing_Sources" type="ucoCommon:ContributingSourcesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Contributing_Sources field is optional and enables description of the individual contributing sources involved in this instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Time" type="ucoCommon:TimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Time element is optional and enables description of various time-related attributes for this instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tools" type="ucoCommon:ToolsInformationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Tools element is optional and enables description of the tools utilized for this instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="References" type="ucoCommon:ReferencesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The References field is optional and enables specification of references to information source material for this instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToolSpecificDataType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>The ToolSpecificDataType is an Abstract type placeholder within the CybOX schema enabling the inclusion of metadata for a specific type of tool through the use of a custom type defined as an extension of this base Abstract type.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ToolsInformationType">
+		<xs:annotation>
+			<xs:documentation>The ToolsInformationType represents a description of a set of automated tools.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Tool" type="ucoCommon:ToolInformationType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Tool field is optional and enables description of a single tool utilized for this cyber observation source.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToolInformationType">
+		<xs:annotation>
+			<xs:documentation>The ToolInformationType is intended to characterize the properties of a hardware or software tool, including those related to instances of its use.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Short_Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the tool leveraged.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains the type of the tool leveraged.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. No default vocabulary type has been defined for CybOX 2.0. Users may either define their own vocabulary using the type extension mechanism (by specifying a vocabulary name and/or reference using the vocab_name and vocab_reference attributes, respectively) or simply use this as a free string field. Additionally, locations where the ToolInformationType is used may define default vocabularies for this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains general descriptive information for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="References" type="ucoCommon:ToolReferencesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains references to instances or additional information for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Vendor" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information identifying the vendor organization for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains an appropriate version descriptor of this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Service_Pack" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains an appropriate service pack descriptor for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Specific_Data" type="ucoCommon:ToolSpecificDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is an abstract type provided to a flexible mechanism for enabling tool-specific data to be included.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Hashes" type="cyboxCommon:HashListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains a hash value computed on the tool file content in order to verify its integrity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Configuration" type="ucoCommon:ToolConfigurationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the configuration and usage of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Execution_Environment" type="ucoCommon:ExecutionEnvironmentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the execution environment of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Errors" type="ucoCommon:ErrorsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field captures any errors generated during the run of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Metadata" type="ucoCommon:MetadataType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field captures other relevant metadata including tool-specific fields.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compensation_Model" type="ucoCommon:CompensationModelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the compensation model used for the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>The id field specifies a unique ID for this Tool.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="idref" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>The idref field specifies reference to a unique ID for this Tool.</xs:documentation>
+				<xs:documentation>When idref is specified, the id attribute must not be specified, and any instance of this type should not hold content unless an extension of the type allows it.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="CompensationModelType">
+		<xs:union memberTypes="cyboxCommon:CompensationModelEnum xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CompensationModelEnum">
+		<xs:annotation>
+			<xs:documentation>The CompensationModelEnum is a (non-exhaustive) enumeration of compensation models for tools.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Freeware">
+				<xs:annotation>
+					<xs:documentation>Specifies that the tool is available for use at no monetary cost as the compensation model.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Shareware">
+				<xs:annotation>
+					<xs:documentation>Specifies that the tool is proprietary and offers a limited use license as the compensation model.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Commercial">
+				<xs:annotation>
+					<xs:documentation>Specifies that the tool is produced for sale or serves commercial purposes as the compensation model.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Adware">
+				<xs:annotation>
+					<xs:documentation>Specifies that the tool uses automatically rendered advertisements as the compensation model.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ToolReferencesType">
+		<xs:annotation>
+			<xs:documentation>Used to indicate one or more references to tool instances and information.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Reference" type="ucoCommon:ToolReferenceType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Contains one reference to information or instances of a given tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToolReferenceType">
+		<xs:annotation>
+			<xs:documentation>Contains one reference to information or instances of a given tool.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attribute name="reference_type" type="ucoCommon:ToolReferenceTypeEnum">
+					<xs:annotation>
+						<xs:documentation>Indicates the nature of the referenced material (documentation, source, executable, etc.).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ToolReferenceTypeEnum">
+		<xs:annotation>
+			<xs:documentation>The nature of referenced material regarding a tool.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Documentation">
+				<xs:annotation>
+					<xs:documentation>The reference is to documentation about the identified tool.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Source">
+				<xs:annotation>
+					<xs:documentation>The reference is to source code for the identified tool.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Download">
+				<xs:annotation>
+					<xs:documentation>The reference is to where an executable version of the tool can be downloaded.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Execute">
+				<xs:annotation>
+					<xs:documentation>The reference is to the tool implemented as an online service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Other">
+				<xs:annotation>
+					<xs:documentation>The reference is to material about the tool not covered by other values in this enumeration.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ToolConfigurationType">
+		<xs:annotation>
+			<xs:documentation>The ToolConfigurationType characterizes the configuration for a tool used as a cyber observation source.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Configuration_Settings" type="ucoCommon:ConfigurationSettingsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field describes the configuration settings of this tool instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Dependencies" type="ucoCommon:DependenciesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the relevant dependencies for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Usage_Context_Assumptions" type="ucoCommon:UsageContextAssumptionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains descriptions of the various relevant usage context assumptions for this tool .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Internationalization_Settings" type="ucoCommon:InternationalizationSettingsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing relevant internationalization setting for this tool .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Information" type="ucoCommon:BuildInformationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing how this tool was built.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfigurationSettingsType">
+		<xs:annotation>
+			<xs:documentation>The ConfigurationSettingsType is a modularized data type used to provide a consistent approach to describing configuration settings for a tool, application or other cyber object.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0">
+			<xs:element name="Configuration_Setting" type="ucoCommon:ConfigurationSettingType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains a single configuration setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfigurationSettingType">
+		<xs:annotation>
+			<xs:documentation>The ConfigurationSettingType is a modularized data type used to provide a consistent approach to describing a particular configuration setting for a tool, application or other cyber object.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Item_Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the configuration item referenced by this configuration setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Item_Value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the value of this configuration setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Item_Type" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the type of the configuration item referenced in this configuration setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Item_Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains a description of the configuration item referenced in this configuration setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DependenciesType">
+		<xs:annotation>
+			<xs:documentation>The DependenciesType contains information describing a set of dependencies for this tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Dependency" type="ucoCommon:DependencyType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing a single dependency for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DependencyType">
+		<xs:annotation>
+			<xs:documentation>The DependencyType contains information describing a single dependency for this tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Dependency_Type" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field describes the type of this dependency instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Dependency_Description" type="ucoCommon:StructuredTextType">
+				<xs:annotation>
+					<xs:documentation>This field contains a description of this dependency instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UsageContextAssumptionsType">
+		<xs:annotation>
+			<xs:documentation>The UsageContextAssumptionsType contains descriptions of the various relevant usage context assumptions for this tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Usage_Context_Assumption" type="ucoCommon:StructuredTextType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains a single usage context assumption for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InternationalizationSettingsType">
+		<xs:annotation>
+			<xs:documentation>The InternationalizationSettingsType contains information describing relevant internationalization setting for this tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Internal_Strings" type="ucoCommon:InternalStringsType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains a single internal string instance for this internationalization setting instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InternalStringsType">
+		<xs:annotation>
+			<xs:documentation>The InternalStringsType contains a single internal string instance for this internationalization setting instance.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Key" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the actual key of this internal string instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Content" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the actual content of this internal string instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuildInformationType">
+		<xs:annotation>
+			<xs:documentation>The BuildInformationType contains information describing how this tool was built.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Build_ID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains an externally defined unique identifier of this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Project" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the project name of this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Utility" type="ucoCommon:BuildUtilityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information identifying the utility used to build this application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Version" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the appropriate version descriptor of this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Label" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains any relevant label for this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compilers" type="ucoCommon:CompilersType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field describes the compilers utilized during this build of this application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compilation_Date" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field identifies the compilation date for the build of the tool. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Configuration" type="ucoCommon:BuildConfigurationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field describes how the build utility was configured for this build of this application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Script" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the actual build script for this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Libraries" type="ucoCommon:LibrariesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field identifies the libraries incorporated into the build of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Output_Log" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains a capture of the output log of the build process.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuildUtilityType">
+		<xs:annotation>
+			<xs:documentation>The BuildUtilityType contains information identifying the utility used to build this application.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Build_Utility_Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the informally defined name of the utility used to build this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Build_Utility_Platform_Specification" type="ucoCommon:PlatformSpecificationType">
+				<xs:annotation>
+					<xs:documentation>This field identifies the build utility used to build this application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompilersType">
+		<xs:annotation>
+			<xs:documentation>The CompilersType describes the compilers utilized during this build of this application.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Compiler" type="ucoCommon:CompilerType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field describes a single compiler utilized during this build of this application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompilerType">
+		<xs:annotation>
+			<xs:documentation>The CompilerType describes a single compiler utilized during this build of this application.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Compiler_Informal_Description" type="ucoCommon:CompilerInformalDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the informal description of this compiler instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compiler_Platform_Specification" type="ucoCommon:PlatformSpecificationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field identifies this compiler instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompilerInformalDescriptionType">
+		<xs:annotation>
+			<xs:documentation>The CompilerInformalDescriptionType contains the informal description of this compiler instance.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Compiler_Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the compiler.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compiler_Version" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the version of the compiler.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuildConfigurationType">
+		<xs:annotation>
+			<xs:documentation>The BuildConfigurationType describes how the build utility was configured for this build of this application.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Configuration_Setting_Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the description of the configuration settings for this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Configuration_Settings" type="ucoCommon:ConfigurationSettingsType">
+				<xs:annotation>
+					<xs:documentation>This field contains the configuration settings for this build of this application instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LibrariesType">
+		<xs:annotation>
+			<xs:documentation>The LibrariesType identifies the libraries incorporated into the build of the tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Library" type="ucoCommon:LibraryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field identifies a library incorporated into the build of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LibraryType">
+		<xs:annotation>
+			<xs:documentation>The LibraryType identifies a single library incorporated into the build of the tool.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This field identifies the name of the library.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="version" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This field identifies the version of the library.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ExecutionEnvironmentType">
+		<xs:annotation>
+			<xs:documentation>The ExecutionEnvironmentType contains information describing the execution environment of the tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="System" type="cyboxCommon:ObjectPropertiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the system on which the tool was executed. System should be of type SystemObj:SystemObjectType.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="User_Account_Info" type="cyboxCommon:ObjectPropertiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the user account that executed the tool. User_Account_Info should be of type UserAccountObj:UserAccountObjectType.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Command_Line" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field specifies the command line string used to run the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Start_Time" type="ucoCommon:DateTimeWithPrecisionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field specifies when the tool was run. In order to avoid ambiguity, it is strongly suggest that all timestamps in this field include a specification of the timezone if it is known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorsType">
+		<xs:annotation>
+			<xs:documentation>The ErrorsType captures any errors generated during the run of the tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Error" type="ucoCommon:ErrorType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field captures a single type of error generated during the run of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:annotation>
+			<xs:documentation>The ErrorType captures a single error generated during the run of the tool.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Error_Type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This field specifies the type for this tool run error.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Error_Count" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field specifies the count of instances for this error in the tool run.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Error_Instances" type="ucoCommon:ErrorInstancesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field captures the actual error output for each instance of this type of error.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorInstancesType">
+		<xs:annotation>
+			<xs:documentation>The ErrorInstancesType captures the actual error output for each instance of this type of error.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Error_Instance" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field captures the actual error output for a single instance of this type of error.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlatformSpecificationType">
+		<xs:annotation>
+			<xs:documentation>PlatformSpecificationType is a modularized data type intended for providing a consistent approach to uniquely specifying the identity of a specific platform.</xs:documentation>
+			<xs:documentation>In addition to capturing basic information, this type is intended to be extended to enable the structured description of a platform instance using the XML Schema extension feature. The CybOX default extension uses the Common Platform Enumeration (CPE) Applicability Language schema to do so. The extension that defines this is captured in the CPE23PlatformSpecificationType in the http://cybox.mitre.org/extensions/platform#CPE2.3-1 namespace. This type is defined in the extensions/platform/cpe2.3.xsd file.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A prose description of the indicated platform.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identifier" type="ucoCommon:PlatformIdentifierType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates a pre-defined name for the given platform using some naming scheme. For example, one could provide a CPE (Common Platform Enumeration) name using the CPE naming format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlatformIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Used to specify a name for a platform using a particular naming system and also allowing a reference pointing to more information about that naming scheme. For example, one could provide a CPE (Common Platform Enumeration) name using the CPE naming format. In this case, the system value could be "CPE" while the system_ref value could be "http://scap.nist.gov/specifications/cpe/".</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="system" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Indicates the naming system from which the indicated name was drawn.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="system-ref" type="xs:anyURI">
+					<xs:annotation>
+						<xs:documentation>A reference to information about the naming system from which the indicated name was drawn.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MetadataType">
+		<xs:annotation>
+			<xs:documentation>The MetadataType is intended as mechanism to capture any non-context-specific metadata.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field specifies the value of name of a single metadata field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubDatum" type="ucoCommon:MetadataType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field uses recursion of the MetadataType specify subdatum structures for this metadata field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This field specifies the type of name of a single metadata field.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="GenericRelationshipListType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Allows the expression of a list of relationships between STIX components. It's extended throughout STIX and should not be used directly. </xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="GenericRelationshipType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Allows the expression of relationships between STIX components. It is extended by each component relationship type to add the component itself.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Confidence" type="ucoCommon:ConfidenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The confidence field specifies the level of confidence in the assertion of the relationship between the two components.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Information_Source field specifies the source of the information about the relationship between the two components.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Relationship" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The relationship field characterizes the type of the relationship between the two components.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. No default vocabulary type has been defined for STIX 1.1.1. Users may either define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a free string field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StatementType">
+		<xs:annotation>
+			<xs:documentation>
+				StatementType allows the expression of a statement with an associated value, description, source, confidence, and timestamp.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies a value characterizing the statement within some vocabulary.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. </xs:documentation>
+					<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies a prose description of the statement.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Source" type="ucoCommon:InformationSourceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Source field captures the source of this statement. An optional vocabulary name and reference allows the expression of the source name in some given vocabulary context.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism.  Users may either define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a free string field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Confidence" type="ucoCommon:ConfidenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Confidence field characterizes the level of confidence held in the statement.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="timestamp" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Specifies the time this statement was asserted.</xs:documentation>
+				<xs:documentation>In order to avoid ambiguity, it is strongly suggest that all timestamps include a specification of the timezone if it is known.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="timestamp_precision" type="ucoCommon:DateTimePrecisionEnum" default="second">
+			<xs:annotation>
+				<xs:documentation>Represents the precision of the associated timestamp value. If omitted, the default is "second", meaning the timestamp is precise to the full field value. Digits in the timestamp that are required by the xs:dateTime datatype but are beyond the specified precision should be zeroed out.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ConfidenceType">
+		<xs:annotation>
+			<xs:documentation>The ConfidenceType specifies a level of Confidence held in some assertion.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the level of confidence held in this direct assertion.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. The default vocabulary type is HighMediumLowVocab-1.0 in the http://stix.mitre.org/default_vocabularies-1 namespace. This type is defined in the stix_default_vocabularies.xsd file or at the URL http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd.</xs:documentation>
+					<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Description field provides a description of the confidence value and how it was derived.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Source" type="ucoCommon:InformationSourceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Source field specifies the source of this confidence assertion. An optional vocabulary name and reference allows the expression of the source name in some given vocabulary context.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. No default vocabulary type has been defined for STIX 1.1.1. Users may either define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a free string field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Confidence_Assertion_Chain" type="ucoCommon:ConfidenceAssertionChainType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Confidence_Assertion_Chain field specifies a set of related confidence levels in this assertion along with who made them, when they were made and how they were made.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="timestamp" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Specifies the time of this Confidence assertion.</xs:documentation>
+				<xs:documentation>In order to avoid ambiguity, it is strongly suggest that all timestamps include a specification of the timezone if it is known.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="timestamp_precision" type="ucoCommon:DateTimePrecisionEnum" default="second">
+			<xs:annotation>
+				<xs:documentation>Represents the precision of the associated timestamp value. If omitted, the default is "second", meaning the timestamp is precise to the full field value. Digits in the timestamp that are required by the xs:dateTime datatype but are beyond the specified precision should be zeroed out.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="IdentityType">
+		<xs:annotation>
+			<xs:documentation>The IdentityType is used to express identity information for both individuals and organizations.</xs:documentation>
+			<xs:documentation>This type is extended through the xsi:type mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_3.0_identity.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_3.0/1.1.1/ciq_3.0_identity.xsd.</xs:documentation>
+			<xs:documentation>Those who wish to express a simple name may also do so by not specifying an xsi:type and using the Name field of this type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Name field allows for expression of an identity through a simple name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Related_Identities" type="ucoCommon:RelatedIdentitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Related_Identities field identifies other entity Identities related to this entity Identity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>Specifies a unique ID for this Identity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="idref" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>Specifies a reference to a unique ID defined elsewhere.</xs:documentation>
+				<xs:documentation>When idref is specified, the id attribute must not be specified, and any instance of this Identity should not hold content.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RelatedIdentityType">
+		<xs:annotation>
+			<xs:documentation>Identifies or characterizes a relationship to an Identity.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:GenericRelationshipType">
+				<xs:sequence>
+					<xs:element name="Identity" type="ucoCommon:IdentityType">
+						<xs:annotation>
+							<xs:documentation>A reference to or representation of the related Identity.</xs:documentation>
+							<xs:documentation>This field is implemented through the xsi:type extension mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_identity_3.0.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_identity_3.0/1.1.1/ciq_identity_3.0.xsd.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RelatedIdentitiesType">
+		<xs:sequence>
+			<xs:element name="Related_Identity" type="ucoCommon:RelatedIdentityType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Related_Identity field identifies a single other entity Identity related to this entity Identity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfidenceAssertionChainType">
+		<xs:sequence>
+			<xs:element name="Confidence_Assertion" type="ucoCommon:ConfidenceType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Confidence_Assertion field specifies a related confidence level in this assertion along with who made it, when it was made and how it was made.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ControlledVocabularyStringType">
+		<xs:annotation>
+			<xs:documentation>The ControlledVocabularyStringType is used as the basis for defining controlled vocabularies.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anySimpleType">
+				<xs:attribute name="vocab_name" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>The vocab_name field specifies the name of the controlled vocabulary.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="vocab_reference" type="xs:anyURI" use="optional">
+					<xs:annotation>
+						<xs:documentation>The vocab_reference field specifies the URI to the location of where the controlled vocabulary is defined, e.g., in an externally located XML schema file.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="ActionType">
+		<xs:annotation>
+			<xs:documentation>Represents a single  Action.</xs:documentation>
+			<xs:documentation>CoursesOfAction are specific measures to be taken to address threat whether they are corrective or preventative to address ExploitTargets, or responsive to counter or mitigate the potential impacts of Incidents. In a structured sense, COA consist of their relevant stage in cyber threat management (e.g., remedy of an ExploitTarget or response to an Incident), type of COA, description of COA, objective of the COA, structured representation of the COA (e.g., IPS rule or automated patch/remediation), the likely impact of the COA, the likely cost of the COA, the estimated efficacy of the COA, observable parameters for the COA, handling guidance, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:CoreConstructType">
+				<xs:sequence>
+					<xs:element name="Type" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Type field specifies the type of this Action.</xs:documentation>
+							<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Objective" type="ucoCommon:ObjectiveType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Objective field characterizes the objective of this Action.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Impact" type="ucoCommon:StatementType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Impact field characterizes the estimated impact of applying this Action.</xs:documentation>
+							<xs:documentation>It is implemented through the StatementType, which allows for the expression of a statement in a vocabulary (Value), a description of the statement (Description), a confidence in the statement (Confidence), and the source of the statement (Source). The default vocabulary type for the Value is HighMediumLowVocab-1.0 in the http://stix.mitre.org/default_vocabularies-1 namespace. This type is defined in the stix_default_vocabularies.xsd file or at the URL http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd.</xs:documentation>
+							<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Cost" type="ucoCommon:StatementType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Cost field characterizes the estimated cost for applying this Action.</xs:documentation>
+							<xs:documentation>It is implemented through the StatementType, which allows for the expression of a statement in a vocabulary (Value), a description of the statement (Description), a confidence in the statement (Confidence), and the source of the statement (Source). The default vocabulary type for the Value is HighMediumLowVocab-1.0 in the http://stix.mitre.org/default_vocabularies-1 namespace. This type is defined in the stix_default_vocabularies.xsd file or at the URL http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd.</xs:documentation>
+							<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Efficacy" type="ucoCommon:StatementType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Efficacy field characterizes the effectiveness of this Action in achieving its targeted Objective.</xs:documentation>
+							<xs:documentation>It is implemented through the StatementType, which allows for the expression of a statement in a vocabulary (Value), a description of the statement (Description), a confidence in the statement (Confidence), and the source of the statement (Source). The default vocabulary type for the Value is HighMediumLowVocab-1.0 in the http://stix.mitre.org/default_vocabularies-1 namespace. This type is defined in the stix_default_vocabularies.xsd file or at the URL http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd.</xs:documentation>
+							<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Related_Actions" type="ucoCommon:RelatedActionsType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Related_Actions field identifies or characterizes relationships to one or more related courses of action.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Related_Action_Lifecycle_Phases" type="ucoCommon:ActionLifecyclePhasesReferenceType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ObjectiveType">
+		<xs:annotation>
+			<xs:documentation>The ObjectiveType characterizes the objective of this Action.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Description field is optional and provides an unstructured, text description of the objective of this CourseOfAction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Short_Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Short_Description field is optional and provides a short, unstructured, text description of the objective of this CourseOfAction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Applicability_Confidence" type="ucoCommon:ConfidenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Applicability_Confidence field characterizes the level of confidence held in the applicability of this suggested COA for its targeted Objective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RelatedActionsType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:GenericRelationshipListType">
+				<xs:sequence>
+					<xs:element name="Related_Action" type="ucoCommon:RelatedActionType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The Related_COA field specifies a single other course of action related to this course of action.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RelatedActionType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:GenericRelationshipType">
+				<xs:sequence>
+					<xs:element name="Action" type="ucoCommon:ActionType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="ActionLifecyclesType">
+		<xs:sequence>
+			<xs:element name="Action_Lifecycle" type="ucoCommon:ActionLifecycleType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field specifies a single Action Lifecycle definition for reference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActionLifecycleType">
+		<xs:annotation>
+			<xs:documentation>TheActionLifecycleType characterizes a specific Action Lifecycle definition.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string" minOccurs="0"/>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field specifies the name of an individual phase within this Action Lifecycle definition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>A globally unique identifier for this kill chain definition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A descriptive name for this kill chain definition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="definer">
+			<xs:annotation>
+				<xs:documentation>The organization or individual responsible for this kill chain definition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="reference" type="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation>A resource reference for this kill chain definition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ActionLifecyclePhaseType">
+		<xs:annotation>
+			<xs:documentation>The KillChainPhaseType characterizes an individual phase within a kill chain definition.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="phase_id" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>A globally unique identifier for this action lifecycle phase.</xs:documentation>
+				<xs:documentation>When used directly within a kill chain definition, this attribute must be globally unique and serves to identify the kill chain phase being defined. When used within a kill chain reference, this attribute must reference an existing kill chain phase phase_id and serves as a reference (similar to @idref elsewhere in STIX).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="phase_idref">
+			<xs:annotation>
+				<xs:documentation>A reference to a unique ID for an action lifecycle phase defined elsewhere.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This field specifies the descriptive name of the relevant kill chain phase.</xs:documentation>
+				<xs:documentation>When used within a kill chain reference, this attribute should be omitted or, if it is present, must match the name used in the kill chain phase definition that this field references.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ordinality" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>This field specifies the ordinality (e.g. 1, 2 or 3) of this phase within this kill chain definition.</xs:documentation>
+				<xs:documentation>When used within a kill chain reference, this attribute should be omitted or, if it is present, must match the ordinality used in the kill chain phase definition that this field references.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ActionLifecyclePhasesReferenceType">
+		<xs:sequence>
+			<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseReferenceType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Action_Lifecycle_Phase field specifies a single Action Lifecycle phase associated with this item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActionLifecyclePhaseReferenceType">
+		<xs:annotation>
+			<xs:documentation>The ActionLifecyclePhaseReferenceType is used to reference Action Lifecycle Phase that are defined elsewhere.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="action_lifecycle_idref" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>This field specifies a reference to the ID for the relevant defined action lifecycle.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="phase_idref" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>This field specifies a reference to the ID for the relevant defined action lifecycle phase.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!---->
+</xs:schema>
