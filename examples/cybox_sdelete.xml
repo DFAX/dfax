@@ -13,19 +13,20 @@
       </cybox:Properties>
       <cybox:Related_Objects>
         <cybox:Related_Object idref="example:File-2">
-          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Characterizes</cybox:Relationship>
         </cybox:Related_Object>
         <cybox:Related_Object idref="example:RegistryKey-3">
-          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created</cybox:Relationship>
         </cybox:Related_Object>
       </cybox:Related_Objects>
     </cybox:Object>
   </cybox:Observable>
   <cybox:Observable id="example:Observable-2">
-    <cybox:Description>The actual executable file corresponding tot he SDelete tool.</cybox:Description>
+    <cybox:Description>The actual executable file corresponding to the SDelete tool.</cybox:Description>
     <cybox:Object id="example:File-2">
       <cybox:Properties xsi:type="FileObj:FileObjectType">
         <FileObj:File_Name>sdelete.exe</FileObj:File_Name>
+        <FileObj:File_Format>PE32 executable for MS Windows (console) Intel 80386 32-bit</FileObj:File_Format>
         <FileObj:Hashes>
           <cyboxCommon:Hash>
             <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
@@ -64,7 +65,7 @@
       </cybox:Properties>
       <cybox:Related_Objects>
         <cybox:Related_Object idref="example:Product-1">
-          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created_By</cybox:Relationship>
+          <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Renamed_By</cybox:Relationship>
         </cybox:Related_Object>
       </cybox:Related_Objects>
     </cybox:Object>
