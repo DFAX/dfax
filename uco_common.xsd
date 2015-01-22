@@ -1306,6 +1306,11 @@
 		</xs:attribute>
 	</xs:complexType>
 	<!---->
+	<xs:complexType name="ObservablesType">
+		<xs:sequence>
+			<xs:element name="Observable" type="ucoCommon:ObservableType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ObservableType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
