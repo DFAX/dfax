@@ -16,8 +16,6 @@
 		</xs:appinfo>
 	</xs:annotation>
 	<xs:import namespace="http://uco.mitre.org/common-1" schemaLocation="uco_common.xsd"/>
-	<xs:import namespace="http://cybox.mitre.org/cybox-2" schemaLocation="cybox/cybox_core.xsd"/>
-	<xs:import namespace="http://data-marking.mitre.org/Marking-1" schemaLocation="data_marking.xsd"/>
 	<!--This is here because Xerces (for some reason) won't resolve CoreConstructType the first time it's used.-
 	<xs:complexType name="DummyType">
 		<xs:complexContent>
