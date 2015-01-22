@@ -335,7 +335,7 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="Observables" type="cybox:ObservablesType" minOccurs="0"/>
+					<xs:element name="Observables" type="ucoCommon:ObservablesType" minOccurs="0"/>
 					<xs:element name="Related_Evidence_Records" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
