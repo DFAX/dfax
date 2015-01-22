@@ -4,16 +4,7 @@
   xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2" xmlns:DeviceObj="http://cybox.mitre.org/objects#DeviceObject-2"
   xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
   xmlns:ImageFileObj="http://cybox.mitre.org/objects#ImageFileObject-1" xmlns:example="http://example.com"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd 
-  http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd 
-  http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd 
-  http://cybox.mitre.org/objects#AddressObject-2 http://cybox.mitre.org/XMLSchema/objects/Address/2.1/Address_Object.xsd 
-  http://cybox.mitre.org/objects#DeviceObject-2 http://cybox.mitre.org/XMLSchema/objects/Device/2.1/Device_Object.xsd 
-  http://cybox.mitre.org/objects#EmailMessageObject-2 http://cybox.mitre.org/XMLSchema/objects/Email_Message/2.1/Email_Message_Object.xsd 
-  http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd 
-  http://cybox.mitre.org/objects#ImageFileObject-1 http://cybox.mitre.org/XMLSchema/objects/Image_File/1.0/Image_File_Object.xsd 
-  http://dfax.mitre.org/dfax-1 file:/C:/code/dfax/dfax_core.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dfax:Case>
     <dfax:ClassificationLevel>Unclassified</dfax:ClassificationLevel>
     <dfax:Details>

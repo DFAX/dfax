@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dfax:DFAX_Package xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+  xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+  xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2" xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+  xmlns:example="http://example.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dfax:Case>
+    <dfax:Observables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cybox="http://cybox.mitre.org/cybox-2"
+      xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+      xmlns:WinRegistryKeyObj="http://cybox.mitre.org/objects#WinRegistryKeyObject-2"
+      xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" xmlns:example="http://example.com" cybox_major_version="2"
+      cybox_minor_version="1" cybox_update_version="0">
+      <cybox:Observable_Package_Source>
+        <cyboxCommon:Tools>
+          <cyboxCommon:Tool>
+            <cyboxCommon:Name>usb-extractor.py</cyboxCommon:Name>
+            <cyboxCommon:Description>USB artifact extraction script</cyboxCommon:Description>
+            <cyboxCommon:Version>2.0.1</cyboxCommon:Version>
+          </cyboxCommon:Tool>
+        </cyboxCommon:Tools>
+      </cybox:Observable_Package_Source>
+      <cybox:Observable id="example:Observable-1">
+        <cybox:Event id="example:Event-1">
+          <cybox:Description>USB Device Connected</cybox:Description>
+          <cybox:Actions>
+            <cybox:Action id="example:Action-1" action_status="Success" context="Host" timestamp="2013-04-08T09:22:00">
+              <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Modify</cybox:Type>
+              <cybox:Name xsi:type="cyboxVocabs:ActionNameVocab-1.0">Modify File</cybox:Name>
+              <cybox:Associated_Objects>
+                <cybox:Associated_Object id="example:Object-1">
+                  <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>setupapi.log</FileObj:File_Name>
+                    <FileObj:File_Path>C:\Windows\setupapi.log</FileObj:File_Path>
+                    <FileObj:Extracted_Features>
+                      <cyboxCommon:Strings>
+                        <cyboxCommon:String>
+                          <cyboxCommon:String_Value>
+                            <![CDATA[\DISK&VEN_KINGSTON&PROD_DATATRAVELER_3.0&REV_PMAP\8606E6D418ABE6077179FAE&0]]>
+                          </cyboxCommon:String_Value>
+                        </cyboxCommon:String>
+                      </cyboxCommon:Strings>
+                    </FileObj:Extracted_Features>
+                  </cybox:Properties>
+                  <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                </cybox:Associated_Object>
+              </cybox:Associated_Objects>
+            </cybox:Action>
+            <cybox:Action id="example:Action-2" action_status="Success" context="Host" timestamp="2013-04-08T09:22:01">
+              <cybox:Type xsi:type="cyboxVocabs:ActionTypeVocab-1.0">Create</cybox:Type>
+              <cybox:Name xsi:type="cyboxVocabs:ActionNameVocab-1.0">Create Registry Key</cybox:Name>
+              <cybox:Associated_Objects>
+                <cybox:Associated_Object id="example:Object-2">
+                  <cybox:Properties xsi:type="WinRegistryKeyObj:WindowsRegistryKeyObjectType">
+                    <WinRegistryKeyObj:Key>\SYSTEM\CurrentControlSet\Enum\USBSTOR</WinRegistryKeyObj:Key>
+                    <WinRegistryKeyObj:Hive>HKEY_LOCAL_MACHINE</WinRegistryKeyObj:Hive>
+                    <WinRegistryKeyObj:Values>
+                      <WinRegistryKeyObj:Value>
+                        <WinRegistryKeyObj:Name>HardwareID</WinRegistryKeyObj:Name>
+                        <WinRegistryKeyObj:Data><![CDATA[Disk&Ven_Kingston&Prod_DataTraveler_3.0&Rev_PMAP\08606E6D418ABE6077179FAE&0]]></WinRegistryKeyObj:Data>
+                        <WinRegistryKeyObj:Datatype>REG_MULTI_SZ</WinRegistryKeyObj:Datatype>
+                      </WinRegistryKeyObj:Value>
+                      <WinRegistryKeyObj:Value>
+                        <WinRegistryKeyObj:Name>FriendlyName</WinRegistryKeyObj:Name>
+                        <WinRegistryKeyObj:Data>1.0 GB USB Device</WinRegistryKeyObj:Data>
+                        <WinRegistryKeyObj:Datatype>REG_SZ</WinRegistryKeyObj:Datatype>
+                      </WinRegistryKeyObj:Value>
+                    </WinRegistryKeyObj:Values>
+                    <WinRegistryKeyObj:Modified_Time>2013-04-08T09:22:00.0Z</WinRegistryKeyObj:Modified_Time>
+                  </cybox:Properties>
+                  <cybox:Association_Type xsi:type="cyboxVocabs:ActionObjectAssociationTypeVocab-1.0">Affected</cybox:Association_Type>
+                </cybox:Associated_Object>
+              </cybox:Associated_Objects>
+            </cybox:Action>
+          </cybox:Actions>
+        </cybox:Event>
+      </cybox:Observable>
+    </dfax:Observables>
+  </dfax:Case>
+</dfax:DFAX_Package>
