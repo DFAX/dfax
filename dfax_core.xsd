@@ -323,11 +323,11 @@
 							<xs:sequence>
 								<xs:element name="Environmental_Characteristic" maxOccurs="unbounded">
 									<xs:complexType>
-										<xs:complexContent>
+										<xs:simpleContent>
 											<xs:extension base="dfax:EnvironmentalCharacteristicType">
 												<xs:attribute name="Exists" type="xs:boolean"/>
 											</xs:extension>
-										</xs:complexContent>
+										</xs:simpleContent>
 									</xs:complexType>
 								</xs:element>
 							</xs:sequence>
@@ -347,9 +347,9 @@
 	</xs:complexType>
 	<!---->
 	<xs:complexType name="EnvironmentalCharacteristicType">
-		<xs:complexContent>
+		<xs:simpleContent>
 			<xs:extension base="ucoCommon:ControlledVocabularyStringType"/>
-		</xs:complexContent>
+		</xs:simpleContent>
 	</xs:complexType>
 	<!---->
 	<xs:element name="Forensic_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
