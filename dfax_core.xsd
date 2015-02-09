@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2015 sp2 (http://www.altova.com) by Sean Barnum (MITRE) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" targetNamespace="http://dfax.mitre.org/dfax-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1" xml:lang="English">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" targetNamespace="http://dfax.mitre.org/dfax-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1" vc:minVersion="1.1" xml:lang="English">
 	<xs:annotation>
 		<xs:documentation>This schema was originally developed by The MITRE Corporation. The DFAX XML Schema implementation is maintained by The MITRE
       Corporation and developed by the open DFAX Community. For more information, including how to get involved in the effort and how to submit change
