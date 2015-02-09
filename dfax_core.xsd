@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2015 sp2 (http://www.altova.com) by Sean Barnum (MITRE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" targetNamespace="http://dfax.mitre.org/dfax-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1" vc:minVersion="1.1" xml:lang="English">
 	<xs:annotation>
 		<xs:documentation>This schema was originally developed by The MITRE Corporation. The DFAX XML Schema implementation is maintained by The MITRE
@@ -16,12 +15,6 @@
 		</xs:appinfo>
 	</xs:annotation>
 	<xs:import namespace="http://uco.mitre.org/common-1" schemaLocation="uco_common.xsd"/>
-	<!--This is here because Xerces (for some reason) won't resolve CoreConstructType the first time it's used.-
-	<xs:complexType name="DummyType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:CoreConstructType"/>
-		</xs:complexContent>
-	</xs:complexType>-->
 	<xs:complexType name="DFAXPackageType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
@@ -54,7 +47,6 @@
 			<xs:documentation>Comment describing your root element</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<!---->
 	<xs:simpleType name="DFAXPackageVersionEnum">
 		<xs:annotation>
 			<xs:documentation>An enumeration of all versions of DFAX package types valid in the current release of DFAX.</xs:documentation>
@@ -63,7 +55,6 @@
 			<xs:enumeration value="0.1"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<!---->
 	<xs:complexType name="CaseType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
@@ -149,7 +140,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="SubjectType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityConstructType">
@@ -172,7 +162,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="VictimType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityConstructType">
@@ -195,7 +184,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="InvestigatorType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityConstructType">
@@ -211,7 +199,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="ExaminerType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityConstructType">
@@ -234,7 +221,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="AttorneyType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityConstructType">
@@ -250,7 +236,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="AuthorizationType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
@@ -268,7 +253,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="SubjectActionType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:ActionType">
@@ -292,7 +276,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="VictimActionType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:ActionType"/>
@@ -311,7 +294,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="EvidenceRecordType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
@@ -345,17 +327,14 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="EnvironmentalCharacteristicType">
 		<xs:simpleContent>
 			<xs:extension base="ucoCommon:ControlledVocabularyStringType"/>
 		</xs:simpleContent>
 	</xs:complexType>
-	<!---->
 	<xs:element name="Forensic_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
 	<xs:element name="Subject_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
 	<xs:element name="Victim_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
-	<!---->
 	<xs:complexType name="RelatedCaseType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:GenericRelationshipType">
@@ -428,5 +407,4 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 </xs:schema>
