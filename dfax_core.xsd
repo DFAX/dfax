@@ -402,4 +402,16 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="BasicIdentityType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IdentityType">
+				<xs:sequence>
+					<xs:element name="Organization" type="xs:string" minOccurs="0"/>
+					<xs:element name="Phone" type="xs:string" minOccurs="0"/>
+					<xs:element name="Email" type="xs:string" minOccurs="0"/>
+					<xs:element name="Address" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 </xs:schema>
