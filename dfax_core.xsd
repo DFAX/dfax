@@ -29,7 +29,7 @@
 					<xs:element ref="dfax:Subject_Lifecycles" minOccurs="0"/>
 					<xs:element ref="dfax:Victim_Lifecycles" minOccurs="0"/>
 				</xs:sequence>
-				<xs:attribute name="version" type="dfax:DFAXPackageVersionEnum">
+				<xs:attribute name="schema_version" type="dfax:DFAXPackageVersionEnum">
 					<xs:annotation>
 						<xs:documentation>Specifies the relevant DFAX schema version for this content.</xs:documentation>
 					</xs:annotation>
@@ -124,13 +124,6 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="Related_Cases" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Case" type="dfax:RelatedCaseType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -143,13 +136,6 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="Related_Action" type="dfax:SubjectActionType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="Related_Subjects" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Subject" type="dfax:RelatedSubjectType" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -168,67 +154,23 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="Related_Victims" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Victim" type="dfax:RelatedVictimType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="InvestigatorType">
 		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentityConstructType">
-				<xs:sequence>
-					<xs:element name="Related_Investigators" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Investigator" type="dfax:RelatedInvestigatorType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
+			<xs:extension base="ucoCommon:IdentityConstructType"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ExaminerType">
 		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentityConstructType">
-				<xs:sequence>
-					<xs:element name="Related_Actions" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Action" type="dfax:ForensicActionType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="Related_Examiners" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Examiner" type="dfax:RelatedExaminerType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
+			<xs:extension base="ucoCommon:IdentityConstructType"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="AttorneyType">
 		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentityConstructType">
-				<xs:sequence>
-					<xs:element name="Related_Attorneys" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Attorney" type="dfax:RelatedAttorneyType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
+			<xs:extension base="ucoCommon:IdentityConstructType"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="AuthorizationType">
@@ -311,13 +253,6 @@
 						</xs:complexType>
 					</xs:element>
 					<xs:element name="Observables" type="ucoCommon:ObservablesType" minOccurs="0"/>
-					<xs:element name="Related_Evidence_Records" minOccurs="0">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Related_Evidence_Record" type="dfax:RelatedEvidenceRecordType" maxOccurs="unbounded"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -330,78 +265,6 @@
 	<xs:element name="Forensic_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
 	<xs:element name="Subject_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
 	<xs:element name="Victim_Lifecycles" type="ucoCommon:ActionLifecyclesType"/>
-	<xs:complexType name="RelatedCaseType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Case" type="dfax:CaseType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedAuthorizationType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Authorization" type="dfax:AuthorizationType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedAttorneyType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Attorney" type="dfax:AttorneyType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedInvestigatorType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Investigator" type="dfax:InvestigatorType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedExaminerType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Examiner" type="dfax:ExaminerType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedSubjectType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Subject" type="dfax:SubjectType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedVictimType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Victim" type="dfax:VictimType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedEvidenceRecordType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Evidence_Record" type="dfax:EvidenceRecordType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="BasicIdentityType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IdentityType">
