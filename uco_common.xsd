@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2015 sp2 (http://www.altova.com) by Sean Barnum (MITRE) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" targetNamespace="http://uco.mitre.org/common-1" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:import namespace="http://cybox.mitre.org/common-2" schemaLocation="cybox/cybox_common.xsd"/>
 	<xs:import namespace="http://cybox.mitre.org/cybox-2" schemaLocation="cybox/cybox_core.xsd"/>
-	<xs:element name="UCO">
-		<xs:annotation>
-			<xs:documentation>Comment describing your root element</xs:documentation>
-		</xs:annotation>
-	</xs:element>
-	<!---->
 	<xs:complexType name="IDableConstructType">
 		<xs:attribute name="id" type="xs:QName">
 			<xs:annotation>
@@ -82,7 +75,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="StructuredTextType">
 		<xs:annotation>
 			<xs:documentation>The StructuredTextType is a type representing a generalized structure for capturing structured or unstructured textual information such as descriptions of things.</xs:documentation>
@@ -224,7 +216,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="InformationSourceType">
 		<xs:annotation>
 			<xs:documentation>The InformationSourceType details the source of a given data entry.</xs:documentation>
@@ -915,7 +906,6 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="GenericRelationshipListType" abstract="true">
 		<xs:annotation>
 			<xs:documentation>Allows the expression of a list of relationships between STIX components. It's extended throughout STIX and should not be used directly. </xs:documentation>
@@ -1112,7 +1102,6 @@
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="ActionType">
 		<xs:annotation>
 			<xs:documentation>Represents a single  Action.</xs:documentation>
@@ -1208,7 +1197,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="ActionLifecyclesType">
 		<xs:sequence>
 			<xs:element name="Action_Lifecycle" type="ucoCommon:ActionLifecycleType" maxOccurs="unbounded">
@@ -1304,7 +1292,6 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="ObservablesType">
 		<xs:sequence>
 			<xs:element name="Observable" type="ucoCommon:ObservableType" maxOccurs="unbounded"/>
@@ -1334,7 +1321,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 	<xs:complexType name="MarkingType">
 		<xs:annotation>
 			<xs:documentation>MarkingType specifies a structure for marking information to be applied to portions of XML content.</xs:documentation>
@@ -1414,5 +1400,4 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!---->
 </xs:schema>
