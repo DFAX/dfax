@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" targetNamespace="http://dfax.mitre.org/dfax-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1" vc:minVersion="1.1" xml:lang="English">
 	<xs:annotation>
-		<xs:documentation>This schema was originally developed by The MITRE Corporation. The DFAX XML Schema implementation is maintained by The MITRE
-      Corporation and developed by the open DFAX Community. For more information, including how to get involved in the effort and how to submit change
-      requests, please visit the DFAX website at http://dfax.mitre.org. </xs:documentation>
+		<xs:documentation>This schema was originally developed by The MITRE Corporation. The DFAX XML Schema implementation is maintained by The MITRE Corporation and developed by the open DFAX Community. For more information, including how to get involved in the effort and how to submit change requests, please visit the DFAX website at http://dfax.mitre.org.</xs:documentation>
 		<xs:appinfo>
 			<version>0.1</version>
 			<date>1/06/2015 2:00:00 PM</date>
-			<short_description>Digital Forensic Analysis eXpression (DFAX) - Schematic implementation for a structured digital forensics analysis expression
-        language architecture.</short_description>
-			<terms_of_use>Copyright (c) 2012-2014, The MITRE Corporation. All rights reserved. The contents of this file are subject to the terms of the
-        DFAX License located at http://dfax.mitre.org/about/termsofuse.html. See the DFAX License for the specific language governing permissions and
-        limitations for use of this schema. When distributing copies of the DFAX Schema, this license header must be included. </terms_of_use>
+			<short_description>Digital Forensic Analysis eXpression (DFAX) - Schematic implementation for a structured digital forensics analysis expression language architecture.</short_description>
+			<terms_of_use>Copyright (c) 2012-2014, The MITRE Corporation. All rights reserved. The contents of this file are subject to the terms of the DFAX License located at http://dfax.mitre.org/about/termsofuse.html. See the DFAX License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the DFAX Schema, this license header must be included.</terms_of_use>
 		</xs:appinfo>
 	</xs:annotation>
 	<xs:import namespace="http://uco.mitre.org/common-1" schemaLocation="uco_common.xsd"/>
