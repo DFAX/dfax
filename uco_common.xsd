@@ -982,11 +982,6 @@
 							<xs:documentation>The Name field allows for expression of an identity through a simple name.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="Related_Identities" type="ucoCommon:RelatedIdentitiesType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>The Related_Identities field identifies other entity Identities related to this entity Identity.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -995,32 +990,6 @@
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:IDReferenceType"/>
 		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedIdentityType">
-		<xs:annotation>
-			<xs:documentation>Identifies or characterizes a relationship to an Identity.</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Identity" type="ucoCommon:IdentityType">
-						<xs:annotation>
-							<xs:documentation>A reference to or representation of the related Identity.</xs:documentation>
-							<xs:documentation>This field is implemented through the xsi:type extension mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_identity_3.0.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_identity_3.0/1.1.1/ciq_identity_3.0.xsd.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedIdentitiesType">
-		<xs:sequence>
-			<xs:element name="Related_Identity" type="ucoCommon:RelatedIdentityType" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>The Related_Identity field identifies a single other entity Identity related to this entity Identity.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ConfidenceAssertionChainType">
 		<xs:sequence>
@@ -1090,13 +1059,6 @@
 							<xs:documentation>Users may also define their own vocabulary using the type extension mechanism, specify a vocabulary name and reference using the attributes, or simply use this as a string field.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="Related_Observables" type="ucoCommon:Related_ObservablesType" minOccurs="0"/>
-					<xs:element name="Related_Actions" type="ucoCommon:RelatedActionsType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>The Related_Actions field identifies or characterizes relationships to one or more related courses of action.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Related_Action_Lifecycle_Phases" type="ucoCommon:ActionLifecyclePhasesReferenceType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1122,28 +1084,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="RelatedActionsType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipListType">
-				<xs:sequence>
-					<xs:element name="Related_Action" type="ucoCommon:RelatedActionType" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>The Related_COA field specifies a single other course of action related to this course of action.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="RelatedActionType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Action" type="ucoCommon:ActionType"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ActionLifecyclesType">
 		<xs:sequence>
@@ -1250,21 +1190,6 @@
 			<xs:extension base="ucoCommon:CoreConstructType">
 				<xs:sequence>
 					<xs:element name="Structured_Observable" type="cybox:ObservableType" minOccurs="0"/>
-					<xs:element name="Related_Observables" type="ucoCommon:Related_ObservablesType" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="Related_ObservablesType">
-		<xs:sequence>
-			<xs:element name="Related_Observable" type="ucoCommon:RelatedObservableType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="RelatedObservableType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:GenericRelationshipType">
-				<xs:sequence>
-					<xs:element name="Observable" type="ucoCommon:ObservableType"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
