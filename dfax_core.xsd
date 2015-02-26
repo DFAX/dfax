@@ -225,8 +225,8 @@
 					<xs:element name="Authorization" type="dfax:AuthorizationType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Requested_By" type="dfax:InvestigatorType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Examiner" type="dfax:ExaminerType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Input_Evidence_Record" type="dfax:EvidenceRecordType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Output_Evidence_Record" type="dfax:EvidenceRecordType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Input_Evidence_Record" type="dfax:EvidenceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Output_Evidence_Record" type="dfax:EvidenceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -255,6 +255,11 @@
 					<xs:element name="Observables" type="ucoCommon:ObservablesType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EvidenceRecordReferenceType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDReferenceType"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="EnvironmentalCharacteristicType">
