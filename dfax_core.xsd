@@ -28,6 +28,7 @@
 					<xs:element ref="dfax:Forensic_Lifecycles" minOccurs="0"/>
 					<xs:element ref="dfax:Subject_Lifecycles" minOccurs="0"/>
 					<xs:element ref="dfax:Victim_Lifecycles" minOccurs="0"/>
+					<xs:element name="Observables" type="ucoCommon:ObservablesType" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="schema_version" type="dfax:DFAXPackageVersionEnum">
 					<xs:annotation>
@@ -252,7 +253,7 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="Observables" type="ucoCommon:ObservablesType" minOccurs="0"/>
+					<xs:element name="Observables" type="ucoCommon:ObservableReferencesType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
