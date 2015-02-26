@@ -10,11 +10,15 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="VersionedIdentifiableType">
-		<xs:attribute name="version" type="xs:dateTime">
-			<xs:annotation>
-				<xs:documentation>A timestamp specifying a precise version of a construct, by giving the time of its definition.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IdentifiableType">
+				<xs:attribute name="version" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>A timestamp specifying a precise version of a construct, by giving the time of its definition.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="IDReferenceType">
 		<xs:attribute name="idref" type="xs:QName">
@@ -24,11 +28,15 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="VersionedIDReferenceType">
-		<xs:attribute name="version" type="xs:dateTime">
-			<xs:annotation>
-				<xs:documentation>Specifies a timestamp for the definition of a specific version of a referenced construct.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDReferenceType">
+				<xs:attribute name="version" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Specifies a timestamp for the definition of a specific version of a referenced construct.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="SourcedConstructType">
 		<xs:complexContent>
@@ -1189,9 +1197,19 @@
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
 				<xs:sequence>
-					<xs:element name="Structured_Observable" type="cybox:ObservableType" minOccurs="0"/>
+					<xs:element name="Object" type="cybox:ObjectType"/>
 				</xs:sequence>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ObservableReferencesType">
+		<xs:sequence>
+			<xs:element name="Observable" type="ucoCommon:ObservableReferenceType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ObservableReferenceType">
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDReferenceType"/>			
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="MarkingType">
