@@ -1104,65 +1104,55 @@
 	</xs:complexType>
 	<xs:complexType name="ActionLifecycleType">
 		<xs:annotation>
-			<xs:documentation>TheActionLifecycleType characterizes a specific Action Lifecycle definition.</xs:documentation>
+			<xs:documentation>TheActionLifecycleType characterizes a specific action life cycle definition.</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="Title" type="xs:string" minOccurs="0"/>
-			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseType" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>This field specifies the name of an individual phase within this Action Lifecycle definition.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-		<xs:attribute name="id" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>A globally unique identifier for this kill chain definition.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="name" type="xs:string">
-			<xs:annotation>
-				<xs:documentation>A descriptive name for this kill chain definition.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="definer">
-			<xs:annotation>
-				<xs:documentation>The organization or individual responsible for this kill chain definition.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="reference" type="xs:anyURI">
-			<xs:annotation>
-				<xs:documentation>A resource reference for this kill chain definition.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IdentifiableType">
+				<xs:sequence>
+					<xs:element name="Title" type="xs:string" minOccurs="0"/>
+					<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>This field specifies the name of an individual phase within this action life cycle.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="name" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>A descriptive name for this action life cycle.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="definer">
+					<xs:annotation>
+						<xs:documentation>The organization or individual responsible for defining this action life cycle.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="reference" type="xs:anyURI">
+					<xs:annotation>
+						<xs:documentation>A resource reference for this action life cycle.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ActionLifecyclePhaseType">
 		<xs:annotation>
-			<xs:documentation>The KillChainPhaseType characterizes an individual phase within a kill chain definition.</xs:documentation>
+			<xs:documentation>The ActionLifecyclePhaseType characterizes an individual phase within an action life cycle.</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="phase_id" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>A globally unique identifier for this action lifecycle phase.</xs:documentation>
-				<xs:documentation>When used directly within a kill chain definition, this attribute must be globally unique and serves to identify the kill chain phase being defined. When used within a kill chain reference, this attribute must reference an existing kill chain phase phase_id and serves as a reference (similar to @idref elsewhere in STIX).</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="phase_idref">
-			<xs:annotation>
-				<xs:documentation>A reference to a unique ID for an action lifecycle phase defined elsewhere.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="name" type="xs:string">
-			<xs:annotation>
-				<xs:documentation>This field specifies the descriptive name of the relevant kill chain phase.</xs:documentation>
-				<xs:documentation>When used within a kill chain reference, this attribute should be omitted or, if it is present, must match the name used in the kill chain phase definition that this field references.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="ordinality" type="xs:int">
-			<xs:annotation>
-				<xs:documentation>This field specifies the ordinality (e.g. 1, 2 or 3) of this phase within this kill chain definition.</xs:documentation>
-				<xs:documentation>When used within a kill chain reference, this attribute should be omitted or, if it is present, must match the ordinality used in the kill chain phase definition that this field references.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IdentifiableType">
+				<xs:attribute name="name" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>This field specifies the descriptive name of the relevant action life cycle phase.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ordinality" type="xs:int">
+					<xs:annotation>
+						<xs:documentation>This field specifies the ordinality (e.g. 1, 2 or 3) of this phase within this action life cycle.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ActionLifecyclePhasesReferenceType">
 		<xs:sequence>
@@ -1177,16 +1167,9 @@
 		<xs:annotation>
 			<xs:documentation>The ActionLifecyclePhaseReferenceType is used to reference Action Lifecycle Phase that are defined elsewhere.</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="action_lifecycle_idref" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>This field specifies a reference to the ID for the relevant defined action lifecycle.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="phase_idref" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>This field specifies a reference to the ID for the relevant defined action lifecycle phase.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:complexContent>
+			<xs:extension base="ucoCommon:IDReferenceType"/>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ObservablesType">
 		<xs:sequence>
