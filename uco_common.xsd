@@ -1046,6 +1046,9 @@
 							<xs:documentation>The Objective field characterizes the objective of this Action.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="Location" type="xs:string" minOccurs="0"/>
+					<xs:element name="DateTime" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="Phase" type="ucoCommon:ActionLifecyclePhaseReferenceType" minOccurs="0"/>
 					<xs:element name="Impact" type="ucoCommon:StatementType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>The Impact field characterizes the estimated impact of applying this Action.</xs:documentation>
