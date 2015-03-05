@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dfax:DFAX_Package xmlns:dfax="http://dfax.mitre.org/dfax-1" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:uco="http://uco.mitre.org/common-1" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2" xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2" xmlns:DeviceObj="http://cybox.mitre.org/objects#DeviceObject-2" xmlns:EmailMessageObj="http://cybox.mitre.org/objects#EmailMessageObject-2" xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2" xmlns:ImageFileObj="http://cybox.mitre.org/objects#ImageFileObject-1" xmlns:example="http://example.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dfax:Case>
+		<uco:Description>John Doe solicited minor (Jane Doe) and exchange contraband (digital photographs)</uco:Description>
+		<dfax:External_IDs>
+			<dfax:External_ID>MD-2014-0601-1234</dfax:External_ID>
+		</dfax:External_IDs>
+		<dfax:Suspected_Offenses>
+			<dfax:Suspected_Offense>Pornography/Obscene Material</dfax:Suspected_Offense>
+		</dfax:Suspected_Offenses>
+		<dfax:Authorizations>
+			<dfax:Authorization>
+				<dfax:Authority xsi:type="dfax:BasicIdentityType">
+					<uco:Name>Judge Dreyfuss</uco:Name>
+					<dfax:Organization>Baltimore City Court</dfax:Organization>
+				</dfax:Authority>
+				<dfax:Warrant_Identifier>06TM041850</dfax:Warrant_Identifier>
+			</dfax:Authorization>
+		</dfax:Authorizations>
+		<dfax:Investigators>
+			<dfax:Investigator>
+				<uco:Identity xsi:type="dfax:BasicIdentityType">
+					<uco:Name>Bob Grave</uco:Name>
+					<dfax:Organization>AFOSI</dfax:Organization>
+					<dfax:Phone>123-456-7890</dfax:Phone>
+					<dfax:Email>bob@example.com</dfax:Email>
+					<dfax:Address>123 Main St.</dfax:Address>
+				</uco:Identity>
+			</dfax:Investigator>
+		</dfax:Investigators>
+		<dfax:Subjects>
+			<dfax:Subject>
+				<uco:Identity xsi:type="dfax:BasicIdentityType">
+					<uco:Name>John Doe</uco:Name>
+					<dfax:Phone>(202) 555-1424</dfax:Phone>
+					<dfax:Email>subject@copit.biz</dfax:Email>
+					<dfax:Address>1234 Main St. Washington DC</dfax:Address>
+				</uco:Identity>
+			</dfax:Subject>
+		</dfax:Subjects>
+		<dfax:Victims>
+			<dfax:Victim>
+				<uco:Identity xsi:type="dfax:BasicIdentityType">
+					<uco:Name>Jane Doe</uco:Name>
+					<dfax:Phone>(410) 555-3624</dfax:Phone>
+				</uco:Identity>
+			</dfax:Victim>
+		</dfax:Victims>
+		<dfax:Forensic_Actions>
+			<dfax:Forensic_Action>
+				<uco:Objective>
+					<uco:Description>Seize suspect's cell phone</uco:Description>
+				</uco:Objective>
+				<uco:Location>Head Quarters, Korea</uco:Location>
+				<uco:DateTime>2014-06-01T17:24:00</uco:DateTime>
+				<uco:Phase idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
+				<dfax:Authorization>
+					<dfax:Warrant_Identifier>216547354375</dfax:Warrant_Identifier>
+				</dfax:Authorization>
+				<dfax:Output_Evidence_Record idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+			</dfax:Forensic_Action>
+			<dfax:Forensic_Action>
+				<uco:Objective>
+					<uco:Description>Find communications and multimedia exchanged between subject and victim.</uco:Description>
+				</uco:Objective>
+				<uco:Phase idref="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6"/>
+				<dfax:Examiner>
+					<uco:Identity xsi:type="dfax:BasicIdentityType">
+						<uco:Name>Eoghan Casey</uco:Name>
+						<dfax:Organization>MITRE</dfax:Organization>
+					</uco:Identity>
+				</dfax:Examiner>
+				<dfax:Input_Evidence_Record idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+			</dfax:Forensic_Action>
+		</dfax:Forensic_Actions>
+		<dfax:Evidence_Records>
+			<dfax:Evidence_Record id="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
+				<uco:Description>Android Smartphone</uco:Description>
+				<dfax:Exhibit_Number>ACME-676553402357</dfax:Exhibit_Number>
+				<dfax:Property_Number>ACME-SM-4567</dfax:Property_Number>
+				<dfax:Observables>
+					<uco:Observable idref="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03"/>
+				</dfax:Observables>
+			</dfax:Evidence_Record>
+		</dfax:Evidence_Records>
+	</dfax:Case>
+	<!-- In normal use, this life cycle would be defined in an external document, and this document would contain only references to its phases. -->
+	<dfax:Forensic_Lifecycles>
+		<uco:Action_Lifecycle id="example:LifeCycle-2aba02cc-7f01-4021-a1ed-b451393f5a85">
+			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-a875bf6f-0e1c-4e32-8f15-7f4cfd79931a" ordinality="1" name="Survey"/>
+			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c" ordinality="2" name="Preservation"/>
+			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6" ordinality="3" name="Examination"/>
+			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-d9b479b0-3672-4612-b85a-5200bf142f31" ordinality="4" name="Analysis"/>
+			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-ed34b890-7a75-49b0-b8d9-2358e600397e" ordinality="5" name="Report"/>
+		</uco:Action_Lifecycle>
+	</dfax:Forensic_Lifecycles>
+	<dfax:Observables>
+		<uco:Observable id="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335">
+			<uco:Object id="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03">
+				<cybox:Properties xsi:type="DeviceObj:DeviceObjectType">
+					<DeviceObj:Description>Suspect's cell phone</DeviceObj:Description>
+					<DeviceObj:Manufacturer>HTC</DeviceObj:Manufacturer>
+					<DeviceObj:Model>G2</DeviceObj:Model>
+					<DeviceObj:Serial_Number>FG344657</DeviceObj:Serial_Number>
+				</cybox:Properties>
+				<cybox:Related_Objects>
+					<cybox:Related_Object idref="example:Device-ccf73c90-cef5-477d-a0d9-9d0b2a11f729">
+						<cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Contains</cybox:Relationship>
+					</cybox:Related_Object>
+				</cybox:Related_Objects>
+			</uco:Object>
+		</uco:Observable>
+		<uco:Observable id="example:Observable-f7fee955-4e5a-49bf-8b36-1034dff359f6">
+			<uco:Object id="example:Device-ccf73c90-cef5-477d-a0d9-9d0b2a11f729">
+				<cybox:Properties xsi:type="DeviceObj:DeviceObjectType">
+					<DeviceObj:Manufacturer>Sandisk</DeviceObj:Manufacturer>
+					<DeviceObj:Model>HCl</DeviceObj:Model>
+					<DeviceObj:Serial_Number>SD43456756757</DeviceObj:Serial_Number>
+				</cybox:Properties>
+				<cybox:Related_Objects>
+					<cybox:Related_Object idref="example:ImageFile-f4e8b9e3-7f0e-4584-8150-8189ded50331">
+						<cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Contains</cybox:Relationship>
+					</cybox:Related_Object>
+				</cybox:Related_Objects>
+			</uco:Object>
+		</uco:Observable>
+		<uco:Observable id="example:Observable-8389114f-6cda-418d-b30e-c5d962298647">
+			<uco:Object id="example:ImageFile-f4e8b9e3-7f0e-4584-8150-8189ded50331">
+				<cybox:Properties xsi:type="ImageFileObj:ImageFileObjectType">
+					<FileObj:File_Name>IMG_234.jpg</FileObj:File_Name>
+					<FileObj:File_Path>DCIM\Pictures</FileObj:File_Path>
+					<FileObj:Size_In_Bytes>12342</FileObj:Size_In_Bytes>
+				</cybox:Properties>
+			</uco:Object>
+		</uco:Observable>
+		<uco:Observable id="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132">
+			<uco:Object id="example:EmailMessage-856ab3af-0127-4f67-aa90-4cee1ca7d8d2">
+				<cybox:Properties xsi:type="EmailMessageObj:EmailMessageObjectType">
+					<EmailMessageObj:Header>
+						<EmailMessageObj:To>
+							<EmailMessageObj:Recipient xsi:type="AddressObj:AddressObjectType" category="e-mail">
+								<AddressObj:Address_Value>victim@mailit.co</AddressObj:Address_Value>
+							</EmailMessageObj:Recipient>
+						</EmailMessageObj:To>
+					</EmailMessageObj:Header>
+					<EmailMessageObj:Attachments>
+						<EmailMessageObj:File object_reference="example:ImageFile-f4e8b9e3-7f0e-4584-8150-8189ded50331"/>
+					</EmailMessageObj:Attachments>
+				</cybox:Properties>
+			</uco:Object>
+		</uco:Observable>
+	</dfax:Observables>
+</dfax:DFAX_Package>
