@@ -2,87 +2,44 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:cyboxCommon="http://cybox.mitre.org/common-2" xmlns:cybox="http://cybox.mitre.org/cybox-2" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:ucoCommon="http://uco.mitre.org/common-1" targetNamespace="http://uco.mitre.org/common-1" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:import namespace="http://cybox.mitre.org/common-2" schemaLocation="cybox/cybox_common.xsd"/>
 	<xs:import namespace="http://cybox.mitre.org/cybox-2" schemaLocation="cybox/cybox_core.xsd"/>
-	<xs:complexType name="IdentifiableType">
-		<xs:attribute name="id" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>A globally unique identifier for this construct.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="VersionedIdentifiableType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:attribute name="version" type="xs:dateTime">
-					<xs:annotation>
-						<xs:documentation>A timestamp specifying a precise version of a construct, by giving the time of its definition.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="IDReferenceType">
-		<xs:attribute name="idref" type="xs:QName">
-			<xs:annotation>
-				<xs:documentation>A globally unique identifier of a construct specified elsewhere.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="VersionedIDReferenceType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType">
-				<xs:attribute name="version" type="xs:dateTime">
-					<xs:annotation>
-						<xs:documentation>Specifies a timestamp for the definition of a specific version of a referenced construct.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="SourcedConstructType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="MarkedConstructType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Handling" type="ucoCommon:MarkingType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Specifies the relevant handling guidance for this construct. </xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+	<xs:attribute name="id" type="xs:QName">
+		<xs:annotation>
+			<xs:documentation>A globally unique identifier for this construct.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="version" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>A timestamp specifying a precise version of a construct, by giving the time of its definition.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="idref" type="xs:QName">
+		<xs:annotation>
+			<xs:documentation>A globally unique identifier of a construct specified elsewhere.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:element name="Information_Source" type="ucoCommon:InformationSourceType"/>
+	<xs:element name="Handling" type="ucoCommon:MarkingType">
+		<xs:annotation>
+			<xs:documentation>Specifies the relevant handling guidance for this construct. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<xs:complexType name="CoreConstructType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:VersionedIdentifiableType">
-				<xs:sequence>
-					<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0"/>
-					<xs:element name="Handling" type="ucoCommon:MarkingType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Specifies the relevant handling guidance for this construct. </xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Title" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>The Title field provides a simple title for this construct.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>The Description field provides a description of this construct.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element ref="ucoCommon:Handling" minOccurs="0"/>
+			<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0"/>
+			<xs:element name="Title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Title field provides a simple title for this construct.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The Description field provides a description of this construct.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="ucoCommon:id"/>
+		<xs:attribute ref="ucoCommon:version"/>
 	</xs:complexType>
 	<xs:complexType name="IdentityConstructType">
 		<xs:complexContent>
@@ -299,98 +256,93 @@
 		<xs:annotation>
 			<xs:documentation>The ToolType is intended to characterize the properties of a hardware or software tool, including those related to instances of its use.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Title" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation/>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Short_Description" type="ucoCommon:StructuredTextType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation/>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Name" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains the name of the tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Type" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>This field contains the type of the tool leveraged.</xs:documentation>
-							<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. No default vocabulary type has been defined for CybOX 2.0. Users may either define their own vocabulary using the type extension mechanism (by specifying a vocabulary name and/or reference using the vocab_name and vocab_reference attributes, respectively) or simply use this as a free string field. Additionally, locations where the ToolType is used may define default vocabularies for this field.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains general descriptive information for this tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="References" type="ucoCommon:URIReferencesType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains references to instances or additional information for this tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Vendor" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains information identifying the vendor organization for this tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Version" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains an appropriate version descriptor of this tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Service_Pack" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains an appropriate service pack descriptor for this tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Tool_Specific_Data" type="ucoCommon:ToolSpecificDataType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This is an abstract type provided to a flexible mechanism for enabling tool-specific data to be included.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Tool_Hashes" type="cyboxCommon:HashListType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains a hash value computed on the tool file content in order to verify its integrity.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Tool_Configuration" type="ucoCommon:ToolConfigurationType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains information describing the configuration and usage of the tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Execution_Environment" type="ucoCommon:ExecutionEnvironmentType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains information describing the execution environment of the tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Errors" type="ucoCommon:ErrorsType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field captures any errors generated during the run of the tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Metadata" type="ucoCommon:MetadataType" minOccurs="0" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>This field captures other relevant metadata including tool-specific fields.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Compensation_Model" type="ucoCommon:CompensationModelType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field contains the name of the compensation model used for the tool.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Short_Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="ucoCommon:ControlledVocabularyStringType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains the type of the tool leveraged.</xs:documentation>
+					<xs:documentation>This field is implemented through the xsi:type controlled vocabulary extension mechanism. No default vocabulary type has been defined for CybOX 2.0. Users may either define their own vocabulary using the type extension mechanism (by specifying a vocabulary name and/or reference using the vocab_name and vocab_reference attributes, respectively) or simply use this as a free string field. Additionally, locations where the ToolType is used may define default vocabularies for this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains general descriptive information for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="References" type="ucoCommon:URIReferencesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains references to instances or additional information for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Vendor" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information identifying the vendor organization for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains an appropriate version descriptor of this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Service_Pack" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains an appropriate service pack descriptor for this tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Specific_Data" type="ucoCommon:ToolSpecificDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is an abstract type provided to a flexible mechanism for enabling tool-specific data to be included.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Hashes" type="cyboxCommon:HashListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains a hash value computed on the tool file content in order to verify its integrity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tool_Configuration" type="ucoCommon:ToolConfigurationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the configuration and usage of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Execution_Environment" type="ucoCommon:ExecutionEnvironmentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains information describing the execution environment of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Errors" type="ucoCommon:ErrorsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field captures any errors generated during the run of the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Metadata" type="ucoCommon:MetadataType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field captures other relevant metadata including tool-specific fields.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Compensation_Model" type="ucoCommon:CompensationModelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field contains the name of the compensation model used for the tool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="ucoCommon:id"/>
 	</xs:complexType>
 	<xs:complexType name="ToolReferenceType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType"/>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:id"/>
 	</xs:complexType>
 	<xs:simpleType name="CompensationModelType">
 		<xs:union memberTypes="cyboxCommon:CompensationModelEnum xs:string"/>
@@ -982,22 +934,17 @@
 			<xs:documentation>This type is extended through the xsi:type mechanism. The default type is CIQIdentity3.0InstanceType in the http://stix.mitre.org/extensions/Identity#CIQIdentity3.0-1 namespace. This type is defined in the extensions/identity/ciq_3.0_identity.xsd file or at the URL http://stix.mitre.org/XMLSchema/extensions/identity/ciq_3.0/1.1.1/ciq_3.0_identity.xsd.</xs:documentation>
 			<xs:documentation>Those who wish to express a simple name may also do so by not specifying an xsi:type and using the Name field of this type.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Name" type="xs:string" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>The Name field allows for expression of an identity through a simple name.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Name field allows for expression of an identity through a simple name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="ucoCommon:id"/>
 	</xs:complexType>
 	<xs:complexType name="IdentityReferenceType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType"/>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:idref"/>
 	</xs:complexType>
 	<xs:complexType name="ConfidenceAssertionChainType">
 		<xs:sequence>
@@ -1109,53 +1056,47 @@
 		<xs:annotation>
 			<xs:documentation>TheActionLifecycleType characterizes a specific action life cycle definition.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Title" type="xs:string" minOccurs="0"/>
-					<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseType" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>This field specifies the name of an individual phase within this action life cycle.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="name" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>A descriptive name for this action life cycle.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-				<xs:attribute name="definer">
-					<xs:annotation>
-						<xs:documentation>The organization or individual responsible for defining this action life cycle.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-				<xs:attribute name="reference" type="xs:anyURI">
-					<xs:annotation>
-						<xs:documentation>A resource reference for this action life cycle.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string" minOccurs="0"/>
+			<xs:element name="Description" type="ucoCommon:StructuredTextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Action_Lifecycle_Phase" type="ucoCommon:ActionLifecyclePhaseType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field specifies the name of an individual phase within this action life cycle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="ucoCommon:id"/>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A descriptive name for this action life cycle.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="definer">
+			<xs:annotation>
+				<xs:documentation>The organization or individual responsible for defining this action life cycle.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="reference" type="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation>A resource reference for this action life cycle.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="ActionLifecyclePhaseType">
 		<xs:annotation>
 			<xs:documentation>The ActionLifecyclePhaseType characterizes an individual phase within an action life cycle.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:attribute name="name" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>This field specifies the descriptive name of the relevant action life cycle phase.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-				<xs:attribute name="ordinality" type="xs:int">
-					<xs:annotation>
-						<xs:documentation>This field specifies the ordinality (e.g. 1, 2 or 3) of this phase within this action life cycle.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:id"/>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This field specifies the descriptive name of the relevant action life cycle phase.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ordinality" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>This field specifies the ordinality (e.g. 1, 2 or 3) of this phase within this action life cycle.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="ActionLifecyclePhasesReferenceType">
 		<xs:sequence>
@@ -1170,9 +1111,7 @@
 		<xs:annotation>
 			<xs:documentation>The ActionLifecyclePhaseReferenceType is used to reference Action Lifecycle Phase that are defined elsewhere.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType"/>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:idref"/>
 	</xs:complexType>
 	<xs:complexType name="ObservablesType">
 		<xs:sequence>
@@ -1194,9 +1133,7 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ObservableReferenceType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType"/>			
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:idref"/>
 	</xs:complexType>
 	<xs:complexType name="MarkingType">
 		<xs:annotation>
@@ -1211,9 +1148,7 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="MarkingControlledStructureType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType"/>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:id"/>
 	</xs:complexType>
 	<xs:complexType name="XPathMarkingControlledStructureType">
 		<xs:complexContent>
@@ -1230,51 +1165,45 @@
 			<xs:documentation>This type is defined as abstract and is intended to be extended to enable the expression of any structured or unstructured data marking mechanism. The data marking structure is simply a mechanism for applying existing marking systems to nodes. The data marking systems themselves define the semantics of what the markings mean, how multiple markings to the same node should be applied, and what to do if a node is unmarked.</xs:documentation>
 			<xs:documentation>It is valid per this specification to mark a node with multiple markings from the same system or mark a node across multiple marking systems. If a node is marked multiple times using the same marking system, that system specifies the semantic meaning of multiple markings and (if necessary) how conflicts should be resolved. If a node is marked across multiple marking systems, each system is considered individually applicable. If there are conflicting markings across marking systems the behavior is undefined, therefore producers should make every effort to ensure documents are marked consistently and correctly among all marking systems.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:attribute name="marking_model_name" type="xs:QName">
-					<xs:annotation>
-						<xs:documentation>This field specifies the name of the marking model to be applied within this Marking_Structure.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-				<xs:attribute name="marking_model_ref" type="xs:anyURI">
-					<xs:annotation>
-						<xs:documentation>This field contains a reference to an authoritative source on the marking model to be applied within this Marking_Structure.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:id"/>
+		<xs:attribute name="marking_model_name" type="xs:QName">
+			<xs:annotation>
+				<xs:documentation>This field specifies the name of the marking model to be applied within this Marking_Structure.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="marking_model_ref" type="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation>This field contains a reference to an authoritative source on the marking model to be applied within this Marking_Structure.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="MarkingSpecificationType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IdentifiableType">
-				<xs:sequence>
-					<xs:element name="Controlled_Structure" type="ucoCommon:MarkingControlledStructureType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>This field utilizes XPath 1.0 to specify the structures for which the Marking is to be applied.</xs:documentation>
-							<xs:documentation>The XPath expression is NOT recursive and the marking structure does NOT apply to child nodes of the selected node. Instead, the expression must explicitly select all nodes that the marking is to be applied to including elements, attributes, and text nodes.</xs:documentation>
-							<xs:documentation>The context root of the XPath statement is this Controlled_Structure element. Any namespace prefix declarations that are available to this Controlled_Structure element are available to the XPath.</xs:documentation>
-							<xs:documentation>Note that all Controlled_Structure elements have a scope within the document for which their XPath is valid to reference.</xs:documentation>
-							<xs:documentation>Usages of MarkingType may specify a "marking scope". The marking scope is always recursive and specifies the set of nodes that may be selected by the XPath expression (and therefore that may have the markings applied to them). If no marking scope is specified in the schema documentation or specification where the MarkingType is used, it should be assumed that the document itself and all nodes are within scope.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Marking_Structure" type="ucoCommon:MarkingStructureType" minOccurs="0" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>This field contains the marking information to be applied to the portions of XML content specified in the ControlledStructure field. This field is defined as MarkingStructureType which is an abstract type the enables the flexibility to utilize any variety of marking structures.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>The Information_Source field details the source of this entry.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="version" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>Specifies the relevant Data_Marking schema version for this content.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="Controlled_Structure" type="ucoCommon:MarkingControlledStructureType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field utilizes XPath 1.0 to specify the structures for which the Marking is to be applied.</xs:documentation>
+					<xs:documentation>The XPath expression is NOT recursive and the marking structure does NOT apply to child nodes of the selected node. Instead, the expression must explicitly select all nodes that the marking is to be applied to including elements, attributes, and text nodes.</xs:documentation>
+					<xs:documentation>The context root of the XPath statement is this Controlled_Structure element. Any namespace prefix declarations that are available to this Controlled_Structure element are available to the XPath.</xs:documentation>
+					<xs:documentation>Note that all Controlled_Structure elements have a scope within the document for which their XPath is valid to reference.</xs:documentation>
+					<xs:documentation>Usages of MarkingType may specify a "marking scope". The marking scope is always recursive and specifies the set of nodes that may be selected by the XPath expression (and therefore that may have the markings applied to them). If no marking scope is specified in the schema documentation or specification where the MarkingType is used, it should be assumed that the document itself and all nodes are within scope.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Marking_Structure" type="ucoCommon:MarkingStructureType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This field contains the marking information to be applied to the portions of XML content specified in the ControlledStructure field. This field is defined as MarkingStructureType which is an abstract type the enables the flexibility to utilize any variety of marking structures.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Information_Source" type="ucoCommon:InformationSourceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Information_Source field details the source of this entry.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="ucoCommon:id"/>
+		<xs:attribute name="version" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Specifies the relevant Data_Marking schema version for this content.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 </xs:schema>

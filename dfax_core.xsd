@@ -259,9 +259,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="EvidenceRecordReferenceType">
-		<xs:complexContent>
-			<xs:extension base="ucoCommon:IDReferenceType"/>
-		</xs:complexContent>
+		<xs:attribute ref="ucoCommon:idref"/>
 	</xs:complexType>
 	<xs:complexType name="EnvironmentalCharacteristicType">
 		<xs:simpleContent>

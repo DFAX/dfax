@@ -53,49 +53,49 @@
 				</uco:Objective>
 				<uco:Location>Head Quarters, Korea</uco:Location>
 				<uco:DateTime>2014-06-01T17:24:00</uco:DateTime>
-				<uco:Phase idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
+				<uco:Phase uco:idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
 				<dfax:Authorization>
 					<dfax:Warrant_Identifier>216547354375</dfax:Warrant_Identifier>
 				</dfax:Authorization>
-				<dfax:Output_Evidence_Record idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action>
 				<uco:Objective>
 					<uco:Description>Find communications and multimedia exchanged between subject and victim.</uco:Description>
 				</uco:Objective>
-				<uco:Phase idref="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6"/>
+				<uco:Phase uco:idref="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6"/>
 				<dfax:Examiner>
 					<uco:Identity xsi:type="dfax:BasicIdentityType">
 						<uco:Name>Eoghan Casey</uco:Name>
 						<dfax:Organization>MITRE</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
 			</dfax:Forensic_Action>
 		</dfax:Forensic_Actions>
 		<dfax:Evidence_Records>
-			<dfax:Evidence_Record id="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
+			<dfax:Evidence_Record uco:id="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
 				<uco:Description>Android Smartphone</uco:Description>
 				<dfax:Exhibit_Number>ACME-676553402357</dfax:Exhibit_Number>
 				<dfax:Property_Number>ACME-SM-4567</dfax:Property_Number>
 				<dfax:Observables>
-					<uco:Observable idref="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03"/>
+					<uco:Observable uco:idref="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03"/>
 				</dfax:Observables>
 			</dfax:Evidence_Record>
 		</dfax:Evidence_Records>
 	</dfax:Case>
 	<!-- In normal use, this life cycle would be defined in an external document, and this document would contain only references to its phases. -->
 	<dfax:Forensic_Lifecycles>
-		<uco:Action_Lifecycle id="example:LifeCycle-2aba02cc-7f01-4021-a1ed-b451393f5a85">
-			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-a875bf6f-0e1c-4e32-8f15-7f4cfd79931a" ordinality="1" name="Survey"/>
-			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c" ordinality="2" name="Preservation"/>
-			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6" ordinality="3" name="Examination"/>
-			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-d9b479b0-3672-4612-b85a-5200bf142f31" ordinality="4" name="Analysis"/>
-			<uco:Action_Lifecycle_Phase id="example:LifeCyclePhase-ed34b890-7a75-49b0-b8d9-2358e600397e" ordinality="5" name="Report"/>
+		<uco:Action_Lifecycle uco:id="example:LifeCycle-2aba02cc-7f01-4021-a1ed-b451393f5a85">
+			<uco:Action_Lifecycle_Phase uco:id="example:LifeCyclePhase-a875bf6f-0e1c-4e32-8f15-7f4cfd79931a" ordinality="1" name="Survey"/>
+			<uco:Action_Lifecycle_Phase uco:id="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c" ordinality="2" name="Preservation"/>
+			<uco:Action_Lifecycle_Phase uco:id="example:LifeCyclePhase-c11c2d2b-369e-497a-8999-3e1a7c7447e6" ordinality="3" name="Examination"/>
+			<uco:Action_Lifecycle_Phase uco:id="example:LifeCyclePhase-d9b479b0-3672-4612-b85a-5200bf142f31" ordinality="4" name="Analysis"/>
+			<uco:Action_Lifecycle_Phase uco:id="example:LifeCyclePhase-ed34b890-7a75-49b0-b8d9-2358e600397e" ordinality="5" name="Report"/>
 		</uco:Action_Lifecycle>
 	</dfax:Forensic_Lifecycles>
 	<dfax:Observables>
-		<uco:Observable id="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335">
+		<uco:Observable uco:id="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335">
 			<uco:Object id="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03">
 				<cybox:Properties xsi:type="DeviceObj:DeviceObjectType">
 					<DeviceObj:Description>Suspect's cell phone</DeviceObj:Description>
@@ -110,7 +110,7 @@
 				</cybox:Related_Objects>
 			</uco:Object>
 		</uco:Observable>
-		<uco:Observable id="example:Observable-f7fee955-4e5a-49bf-8b36-1034dff359f6">
+		<uco:Observable uco:id="example:Observable-f7fee955-4e5a-49bf-8b36-1034dff359f6">
 			<uco:Object id="example:Device-ccf73c90-cef5-477d-a0d9-9d0b2a11f729">
 				<cybox:Properties xsi:type="DeviceObj:DeviceObjectType">
 					<DeviceObj:Manufacturer>Sandisk</DeviceObj:Manufacturer>
@@ -124,7 +124,7 @@
 				</cybox:Related_Objects>
 			</uco:Object>
 		</uco:Observable>
-		<uco:Observable id="example:Observable-8389114f-6cda-418d-b30e-c5d962298647">
+		<uco:Observable uco:id="example:Observable-8389114f-6cda-418d-b30e-c5d962298647">
 			<uco:Object id="example:ImageFile-f4e8b9e3-7f0e-4584-8150-8189ded50331">
 				<cybox:Properties xsi:type="ImageFileObj:ImageFileObjectType">
 					<FileObj:File_Name>IMG_234.jpg</FileObj:File_Name>
@@ -133,7 +133,7 @@
 				</cybox:Properties>
 			</uco:Object>
 		</uco:Observable>
-		<uco:Observable id="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132">
+		<uco:Observable uco:id="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132">
 			<uco:Object id="example:EmailMessage-856ab3af-0127-4f67-aa90-4cee1ca7d8d2">
 				<cybox:Properties xsi:type="EmailMessageObj:EmailMessageObjectType">
 					<EmailMessageObj:Header>
