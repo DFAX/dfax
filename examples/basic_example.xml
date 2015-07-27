@@ -47,7 +47,7 @@
 			</dfax:Victim>
 		</dfax:Victims>
 		<dfax:Forensic_Actions>
-			<dfax:Forensic_Action>
+			<dfax:Forensic_Action uco:id="example:Action-10aed80d-2099-4d8d-99d3-2bc44500521b">
 				<uco:Objective>
 					<uco:Description>Seize suspect's cell phone</uco:Description>
 				</uco:Objective>
@@ -57,9 +57,14 @@
 				<dfax:Authorization>
 					<dfax:Warrant_Identifier>216547354375</dfax:Warrant_Identifier>
 				</dfax:Authorization>
+				<dfax:Examiner>
+					<uco:Identity>
+						<uco:Name>Bob Graves</uco:Name>
+					</uco:Identity>
+				</dfax:Examiner>
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
 			</dfax:Forensic_Action>
-			<dfax:Forensic_Action>
+			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
 				<uco:Objective>
 					<uco:Description>Make forensic image of suspect's cell phone and SD Card.</uco:Description>
 				</uco:Objective>
@@ -75,7 +80,7 @@
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
 			</dfax:Forensic_Action>
-			<dfax:Forensic_Action>
+			<dfax:Forensic_Action uco:id="example:Action-442a7626-8088-4048-abca-24ab848ca853">
 				<uco:Objective>
 					<uco:Description>Find communications and multimedia exchanged between subject and victim.</uco:Description>
 				</uco:Objective>
