@@ -19,7 +19,7 @@
 					<xs:element name="Investigator" type="dfax:InvestigatorType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Examiner" type="dfax:ExaminerType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Forensic_Action" type="dfax:ForensicActionType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Evidence_Record" type="dfax:EvidenceRecordType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Provenance_Record" type="dfax:ProvenanceRecordType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Subject" type="dfax:SubjectType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Subject_Action" type="dfax:SubjectActionType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Victim" type="dfax:VictimType" minOccurs="0" maxOccurs="unbounded"/>
@@ -118,10 +118,10 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="Evidence_Records" minOccurs="0">
+					<xs:element name="Provenance_Records" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Evidence_Record" type="dfax:EvidenceRecordType" maxOccurs="unbounded"/>
+								<xs:element name="Provenance_Record" type="dfax:ProvenanceRecordType" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -195,10 +195,10 @@
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:ActionType">
 				<xs:sequence>
-					<xs:element name="Evidence_Records" minOccurs="0">
+					<xs:element name="Provenance_Records" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Evidence_Record" maxOccurs="unbounded"/>
+								<xs:element name="Provenance_Record" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -226,13 +226,13 @@
 					<xs:element name="Authorization" type="dfax:AuthorizationType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Requested_By" type="dfax:InvestigatorType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="Examiner" type="dfax:ExaminerType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Input_Evidence_Record" type="dfax:EvidenceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="Output_Evidence_Record" type="dfax:EvidenceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Input_Provenance_Record" type="dfax:ProvenanceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Output_Provenance_Record" type="dfax:ProvenanceRecordReferenceType" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="EvidenceRecordType">
+	<xs:complexType name="ProvenanceRecordType">
 		<xs:complexContent>
 			<xs:extension base="ucoCommon:CoreConstructType">
 				<xs:sequence>
@@ -258,7 +258,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="EvidenceRecordReferenceType">
+	<xs:complexType name="ProvenanceRecordReferenceType">
 		<xs:attribute ref="ucoCommon:idref"/>
 	</xs:complexType>
 	<xs:complexType name="EnvironmentalCharacteristicType">

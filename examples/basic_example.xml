@@ -63,7 +63,7 @@
 						<dfax:Organization>ACME</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-26d10197-41ed-4137-8dac-4f8d77da8fe7">
 				<uco:Objective>
@@ -77,9 +77,9 @@
 						<dfax:Organization>DFL</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
+				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
 				<uco:Objective>
@@ -93,8 +93,8 @@
 						<dfax:Organization>MITRE</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
+				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
 				<uco:Objective>
@@ -108,8 +108,8 @@
 						<dfax:Organization>MITRE</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
+				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-442a7626-8088-4048-abca-24ab848ca853">
 				<uco:Objective>
@@ -123,35 +123,35 @@
 						<dfax:Organization>MITRE</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238"/>
-				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84"/>
+				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
+				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238"/>
+				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84"/>
 			</dfax:Forensic_Action>
 		</dfax:Forensic_Actions>
-		<dfax:Evidence_Records>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
+		<dfax:Provenance_Records>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
 				<uco:Description>Android Smartphone</uco:Description>
 				<dfax:Exhibit_Number>ACME-676553402357</dfax:Exhibit_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc">
 				<uco:Description>Android Smartphone</uco:Description>
 				<dfax:Exhibit_Number>DFL-20140712-001A</dfax:Exhibit_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-1bfeb106-b652-400f-9e19-52848f889535">
 				<uco:Description>SD Card</uco:Description>
 				<dfax:Exhibit_Number>DFL-20140712-001B</dfax:Exhibit_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-f7fee955-4e5a-49bf-8b36-1034dff359f6"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-fa163580-f03d-4140-9520-5d327b534628">
 				<uco:Information_Source>
 					<uco:Description>Logical acquisition (ADB Backup)</uco:Description>
 					<uco:Time>
@@ -179,8 +179,8 @@
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-6da04cf4-1a62-4238-aeb0-e104be0054c7"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d">
 				<uco:Information_Source>
 					<uco:Time>
 						<uco:Produced_Time>2014-06-13T09:31:00-05:00</uco:Produced_Time>
@@ -197,20 +197,20 @@
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-d133d2d5-120b-4999-bea0-09df59389a97"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238">
 				<uco:Description>Email From Suspect to Victim containing contraband photograph.</uco:Description>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-			<dfax:Evidence_Record uco:id="example:EvidenceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84">
+			</dfax:Provenance_Record>
+			<dfax:Provenance_Record uco:id="example:ProvenanceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84">
 				<uco:Description>Contraband photograph on suspect's cell phone</uco:Description>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-8389114f-6cda-418d-b30e-c5d962298647"/>
 				</dfax:Observables>
-			</dfax:Evidence_Record>
-		</dfax:Evidence_Records>
+			</dfax:Provenance_Record>
+		</dfax:Provenance_Records>
 	</dfax:Case>
 	<!-- In normal use, this life cycle would be defined in an external document, and this document would contain only references to its phases. -->
 	<dfax:Forensic_Lifecycles>
