@@ -21,7 +21,7 @@
 			<dfax:Investigator>
 				<uco:Identity xsi:type="dfax:BasicIdentityType">
 					<uco:Name>Bob Grave</uco:Name>
-					<dfax:Organization>AFOSI</dfax:Organization>
+					<dfax:Organization>ACME</dfax:Organization>
 					<dfax:Phone>123-456-7890</dfax:Phone>
 					<dfax:Email>bob@example.com</dfax:Email>
 					<dfax:Address>123 Main St.</dfax:Address>
@@ -49,7 +49,7 @@
 		<dfax:Forensic_Actions>
 			<dfax:Forensic_Action uco:id="example:Action-10aed80d-2099-4d8d-99d3-2bc44500521b">
 				<uco:Objective>
-					<uco:Description>Seize suspect's cell phone</uco:Description>
+					<uco:Description>Seize suspect's cell phone.</uco:Description>
 				</uco:Objective>
 				<uco:Location>Head Quarters, Korea</uco:Location>
 				<uco:DateTime>2014-06-01T17:24:00+09:00</uco:DateTime>
@@ -58,15 +58,32 @@
 					<dfax:Warrant_Identifier>216547354375</dfax:Warrant_Identifier>
 				</dfax:Authorization>
 				<dfax:Examiner>
-					<uco:Identity>
+					<uco:Identity xsi:type="dfax:BasicIdentityType">
 						<uco:Name>Bob Graves</uco:Name>
+						<dfax:Organization>ACME</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
 			</dfax:Forensic_Action>
+			<dfax:Forensic_Action uco:id="example:Action-26d10197-41ed-4137-8dac-4f8d77da8fe7">
+				<uco:Objective>
+					<uco:Description>Receive evidence via FedEx from Bob Graves.</uco:Description>
+				</uco:Objective>
+				<uco:DateTime>2014-06-12T15:00:00-05:00</uco:DateTime>
+				<uco:Phase uco:idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
+				<dfax:Examiner>
+					<uco:Identity xsi:type="dfax:BasicIdentityType">
+						<uco:Name>Susan Mizushima</uco:Name>
+						<dfax:Organization>DFL</dfax:Organization>
+					</uco:Identity>
+				</dfax:Examiner>
+				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
+				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
+			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
 				<uco:Objective>
-					<uco:Description>Make forensic image of suspect's cell phone and SD Card.</uco:Description>
+					<uco:Description>Make forensic image of suspect's cell phone.</uco:Description>
 				</uco:Objective>
 				<uco:DateTime>2014-06-13T09:00:00-05:00</uco:DateTime>
 				<uco:Phase uco:idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
@@ -76,8 +93,22 @@
 						<dfax:Organization>MITRE</dfax:Organization>
 					</uco:Identity>
 				</dfax:Examiner>
-				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad"/>
+				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
+			</dfax:Forensic_Action>
+			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
+				<uco:Objective>
+					<uco:Description>Make forensic image of SD card from suspect's cell phone.</uco:Description>
+				</uco:Objective>
+				<uco:DateTime>2014-06-13T09:10:00-05:00</uco:DateTime>
+				<uco:Phase uco:idref="example:LifeCyclePhase-bae7b612-d940-4b77-b75c-0e9406f8712c"/>
+				<dfax:Examiner>
+					<uco:Identity xsi:type="dfax:BasicIdentityType">
+						<uco:Name>Eoghan Casey</uco:Name>
+						<dfax:Organization>MITRE</dfax:Organization>
+					</uco:Identity>
+				</dfax:Examiner>
+				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
 				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
 			</dfax:Forensic_Action>
 			<dfax:Forensic_Action uco:id="example:Action-442a7626-8088-4048-abca-24ab848ca853">
@@ -94,15 +125,30 @@
 				</dfax:Examiner>
 				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
 				<dfax:Input_Evidence_Record uco:idref="example:EvidenceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
+				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238"/>
+				<dfax:Output_Evidence_Record uco:idref="example:EvidenceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84"/>
 			</dfax:Forensic_Action>
 		</dfax:Forensic_Actions>
 		<dfax:Evidence_Records>
 			<dfax:Evidence_Record uco:id="example:EvidenceRecord-3c8b42d9-8e43-4994-a0f9-a692cc251aad">
 				<uco:Description>Android Smartphone</uco:Description>
 				<dfax:Exhibit_Number>ACME-676553402357</dfax:Exhibit_Number>
-				<dfax:Property_Number>ACME-SM-4567</dfax:Property_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335"/>
+				</dfax:Observables>
+			</dfax:Evidence_Record>
+			<dfax:Evidence_Record uco:id="example:EvidenceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc">
+				<uco:Description>Android Smartphone</uco:Description>
+				<dfax:Exhibit_Number>DFL-20140712-001A</dfax:Exhibit_Number>
+				<dfax:Observables>
+					<uco:Observable uco:idref="example:Observable-79da52e6-3edd-4e5e-aa0f-9d3172ffc335"/>
+				</dfax:Observables>
+			</dfax:Evidence_Record>
+			<dfax:Evidence_Record uco:id="example:EvidenceRecord-1bfeb106-b652-400f-9e19-52848f889535">
+				<uco:Description>SD Card</uco:Description>
+				<dfax:Exhibit_Number>DFL-20140712-001B</dfax:Exhibit_Number>
+				<dfax:Observables>
+					<uco:Observable uco:idref="example:Observable-f7fee955-4e5a-49bf-8b36-1034dff359f6"/>
 				</dfax:Observables>
 			</dfax:Evidence_Record>
 			<dfax:Evidence_Record uco:id="example:EvidenceRecord-fa163580-f03d-4140-9520-5d327b534628">
@@ -129,6 +175,7 @@
 					</uco:Tools>
 				</uco:Information_Source>
 				<uco:Description>Forensic image of Android Smartphone</uco:Description>
+				<dfax:Exhibit_Number>DFL-20140712-001C</dfax:Exhibit_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-6da04cf4-1a62-4238-aeb0-e104be0054c7"/>
 				</dfax:Observables>
@@ -145,23 +192,20 @@
 						</uco:Tool>
 					</uco:Tools>
 				</uco:Information_Source>
-				<uco:Description>Forensic image of SDCard</uco:Description>
+				<uco:Description>Forensic image of SD Card.</uco:Description>
+				<dfax:Exhibit_Number>DFL-20140712-001D</dfax:Exhibit_Number>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-d133d2d5-120b-4999-bea0-09df59389a97"/>
 				</dfax:Observables>
 			</dfax:Evidence_Record>
 			<dfax:Evidence_Record uco:id="example:EvidenceRecord-7ba0a76f-2aa7-43e0-b1ac-cda55e58d238">
-				<uco:Description>Email From Suspect to Victim containing contraband image.</uco:Description>
-				<dfax:Exhibit_Number>ACME-676553402358</dfax:Exhibit_Number>
-				<dfax:Property_Number>ACME-SM-0123</dfax:Property_Number>
+				<uco:Description>Email From Suspect to Victim containing contraband photograph.</uco:Description>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132"/>
 				</dfax:Observables>
 			</dfax:Evidence_Record>
 			<dfax:Evidence_Record uco:id="example:EvidenceRecord-a98a7357-0d97-4886-abf1-4ff6ade08d84">
-				<uco:Description>Contraband image on suspect's cell phone</uco:Description>
-				<dfax:Exhibit_Number>ACME-676553402359</dfax:Exhibit_Number>
-				<dfax:Property_Number>ACME-SM-8888</dfax:Property_Number>
+				<uco:Description>Contraband photograph on suspect's cell phone</uco:Description>
 				<dfax:Observables>
 					<uco:Observable uco:idref="example:Observable-8389114f-6cda-418d-b30e-c5d962298647"/>
 				</dfax:Observables>
@@ -213,7 +257,7 @@
 			<uco:Description>Forensic Image of Android Smartphone</uco:Description>
 			<uco:Object id="example:File-11ff2c06-d0fa-4395-8190-f7cb1e766096">
 				<cybox:Properties xsi:type="FileObj:FileObjectType">
-					<FileObj:File_Name>ACME-20140712-001A.tar</FileObj:File_Name>
+					<FileObj:File_Name>DFL-20140712-001A.tar</FileObj:File_Name>
 				</cybox:Properties>
 				<cybox:Related_Objects>
 					<cybox:Related_Object idref="example:Device-f1680e63-d34d-455e-8797-7a8c82370b03">
@@ -226,7 +270,7 @@
 			<uco:Description>Forensic Image of SD Card</uco:Description>
 			<uco:Object id="example:File-135b7b3e-0543-42fc-ad9b-85284cfe6334">
 				<cybox:Properties xsi:type="FileObj:FileObjectType">
-					<FileObj:File_Name>DC3-20140712-001B.dd</FileObj:File_Name>
+					<FileObj:File_Name>DFL-20140712-001B.dd</FileObj:File_Name>
 				</cybox:Properties>
 				<cybox:Related_Objects>
 					<cybox:Related_Object idref="example:Device-ccf73c90-cef5-477d-a0d9-9d0b2a11f729">
@@ -249,7 +293,7 @@
 			</uco:Object>
 		</uco:Observable>
 		<uco:Observable uco:id="example:Observable-f00e5226-e5cd-412f-b85d-92ef7fa17132">
-			<uco:Description>Email from Suspect to Victim containing contraband image</uco:Description>
+			<uco:Description>Email from Suspect to Victim containing contraband photograph.</uco:Description>
 			<uco:Object id="example:EmailMessage-856ab3af-0127-4f67-aa90-4cee1ca7d8d2">
 				<cybox:Properties xsi:type="EmailMessageObj:EmailMessageObjectType">
 					<EmailMessageObj:Header>
