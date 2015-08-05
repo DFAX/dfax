@@ -96,7 +96,7 @@
 				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-2c4d1a3f-fb43-47ec-886f-bd5589a90bfc"/>
 				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-fa163580-f03d-4140-9520-5d327b534628"/>
 			</dfax:Forensic_Action>
-			<dfax:Forensic_Action uco:id="example:Action-377b516e-3bf5-49af-9548-14ff408c013b">
+			<dfax:Forensic_Action uco:id="example:Action-442a7626-8088-4048-abca-24ab848ca853">
 				<uco:Objective>
 					<uco:Description>Make forensic image of SD card from suspect's cell phone.</uco:Description>
 				</uco:Objective>
@@ -111,7 +111,7 @@
 				<dfax:Input_Provenance_Record uco:idref="example:ProvenanceRecord-1bfeb106-b652-400f-9e19-52848f889535"/>
 				<dfax:Output_Provenance_Record uco:idref="example:ProvenanceRecord-4f50fd68-fb3e-482e-9df1-448c30ff017d"/>
 			</dfax:Forensic_Action>
-			<dfax:Forensic_Action uco:id="example:Action-442a7626-8088-4048-abca-24ab848ca853">
+			<dfax:Forensic_Action uco:id="example:Action-5ee361f6-8e28-47fa-9bcd-7c55f00127d7">
 				<uco:Objective>
 					<uco:Description>Find communications and multimedia exchanged between subject and victim.</uco:Description>
 				</uco:Objective>
@@ -246,11 +246,6 @@
 					<DeviceObj:Model>HCl</DeviceObj:Model>
 					<DeviceObj:Serial_Number>SD43456756757</DeviceObj:Serial_Number>
 				</cybox:Properties>
-				<cybox:Related_Objects>
-					<cybox:Related_Object idref="example:ImageFile-f4e8b9e3-7f0e-4584-8150-8189ded50331">
-						<cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Contains</cybox:Relationship>
-					</cybox:Related_Object>
-				</cybox:Related_Objects>
 			</uco:Object>
 		</uco:Observable>
 		<uco:Observable uco:id="example:Observable-6da04cf4-1a62-4238-aeb0-e104be0054c7">
