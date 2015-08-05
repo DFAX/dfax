@@ -1,0 +1,94 @@
+/* Run with:
+ *     dot -Tsvg basic_example.dot > basic_example.svg
+*/
+
+digraph {
+  subgraph {
+    rank=source
+    phase1 [label="Survey\n(a875bf6f)" shape=house]
+    phase2 [label="Preservation\n(bae7b612)" shape=house]
+    phase3 [label="Examination\n(c11c2d2b)" shape=house]
+    phase4 [label="Analysis\n(d9b479b0)" shape=house]
+    phase5 [label="Report\n(ed34b890)" shape=house]
+  }
+
+  subgraph {
+    rank=same
+    action1 [label="Action 1:\nSeize cell phone\n(10aed80d)" shape=box]
+    action2 [label="Action 2:\nReceive evidence\n(26d10197)" shape=box]
+    action3 [label="Action 3:\nTake image of phone\n(377b516e)" shape=box]
+    action4 [label="Action 4:\nTake image of SD card\n(442a7626)" shape=box]
+    action5 [label="Action 5:\nFind email and photograph\n(5ee361f6)" shape=box]
+  }
+
+  action1 -> phase2
+  action2 -> phase2
+  action3 -> phase2
+  action4 -> phase2
+  action5 -> phase3
+
+  subgraph {
+    rank=same
+    record1 [label="Android Smartphone\nACME-676553402357\n(3c8b42d9)"]
+    record2 [label="Android Smartphone\nDFL-20140712-001A\n(2c4d1a3f)"]
+    record3 [label="SD Card\nDFL-20140712-001B\n(1bfeb106)"]
+    record4 [label="Smartphone Image\nDFL-20140712-001C\n(fa163580)"]
+    record5 [label="SD Card Image\nDFL-20140712-001D\n(4f50fd68)"]
+    record6 [label="Email\n(7ba0a76f)"]
+    record7 [label="Photograph\n(a98a7357)"]
+  }
+
+  action1 -> record1
+  record1 -> action2
+  action2 -> record2
+  action2 -> record3
+  record2 -> action3
+  action3 -> record4
+  record3 -> action4
+  action4 -> record5
+  record4 -> action5
+  record5 -> action5
+  action5 -> record6
+  action5 -> record7
+
+  subgraph {
+    rank=same
+    observable1 [label="Android Smartphone\n(79da52e6)" shape=parallelogram]
+    observable2 [label="SD Card\n(f7fee955)" shape=parallelogram]
+    observable3 [label="Smartphone Image\n(6da04cf4)" shape=parallelogram]
+    observable4 [label="SD Card Image\n(d133d2d5)" shape=parallelogram]
+    observable5 [label="Photograph\n(8389114f)" shape=parallelogram]
+    observable6 [label="Email\n(f00e5226)" shape=parallelogram]
+  }
+
+  record1 -> observable1
+  record2 -> observable1
+  record3 -> observable2
+  record4 -> observable3
+  record5 -> observable4
+  record6 -> observable6
+  record7 -> observable5
+
+  subgraph {
+    device1 [label="DeviceObject\n(HTC G2)\n(f1680e63)" shape=diamond]
+    device2 [label="Deviceobject\n(Sandisk HCl)\n(ccf73c90)" shape=diamond]
+    file1 [label="FileObject\n(Phone Image)\n(11ff2c06)" shape=diamond]
+    file2 [label="FileObject\n(SD Card Image)\n(135b7b3e)" shape=diamond]
+    image [label="ImageFileObject\n(f4e8b9e3)" shape=diamond]
+    email [label="EmailMessageObject\n(856ab3af)" shape=diamond]
+  }
+
+  observable1 -> device1
+  observable2 -> device2
+  observable3 -> file1
+  observable4 -> file2
+  observable5 -> image
+  observable6 -> email
+
+  device1 -> device2 [label="Contains"]
+  file1 -> device1 [label="Extracted From"]
+  file2 -> device2 [label="Extracted From"]
+  file2 -> image [label="Contains"]
+  email -> file1 [label="Extracted From"]
+  email -> image [label="Has Attachment"]
+}
